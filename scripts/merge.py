@@ -15,11 +15,11 @@ import sys
 
 # (source URL, category label to force on every channel from this source)
 SOURCES = [
-    ("https://iptv-org.github.io/iptv/languages/dan.m3u", "1. Dansk"),
-    ("https://iptv-org.github.io/iptv/languages/eng.m3u", "4. Engelsk"),
-    ("https://iptv-org.github.io/iptv/languages/tur.m3u", "2. Tyrkisk"),
-    ("https://iptv-org.github.io/iptv/languages/kur.m3u", "3. Kurdisk"),
-    ("https://iptv-org.github.io/iptv/categories/sports.m3u", "5. Sports"),
+    ("https://iptv-org.github.io/iptv/languages/dan.m3u", "Dansk"),
+    ("https://iptv-org.github.io/iptv/languages/tur.m3u", "Tyrkisk"),
+    ("https://iptv-org.github.io/iptv/languages/kur.m3u", "Kurdisk"),
+    ("https://iptv-org.github.io/iptv/languages/eng.m3u", "Engelsk"),
+    ("https://iptv-org.github.io/iptv/categories/sports.m3u", "Sports"),
 ]
 
 OUTPUT_FILE = "playlist.m3u"
