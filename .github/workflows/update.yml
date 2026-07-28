@@ -1,0 +1,26 @@
+name: Update IPTV Playlist
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build playlist
+        run: |
+          echo "#EXTM3U" > playlist.m3u
+          for url in           https://iptv-org.github.io/iptv/languages/dan.m3u           https://iptv-org.github.io/iptv/languages/eng.m3u           https://iptv-org.github.io/iptv/languages/tur.m3u           https://iptv-org.github.io/iptv/languages/kur.m3u           https://iptv-org.github.io/iptv/categories/sports.m3u
+          do
+            curl -s "$url" | tail -n +2 >> playlist.m3u
+          done
+      - name: Commit
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add playlist.m3u
+          git diff --cached --quiet || git commit -m "Update playlist"
+          git push
