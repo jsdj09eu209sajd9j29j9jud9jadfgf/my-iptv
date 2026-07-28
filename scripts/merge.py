@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 """
-Merge multiple M3U playlists into one deduplicated playlist.m3u.
-
-Sources are listed in SOURCES below. Each source is fetched, parsed into
-(#EXTINF line, url line) pairs, and combined. Duplicate stream URLs are
-dropped (keeps the first occurrence) so overlapping channels across
-playlists don't show up twice.
+Merge multiple M3U playlists into one deduplicated playlist.m3u, tagging
+every channel with a fixed group-title so IPTV players display them as
+separate categories (Danish / English / Turkish / Kurdish / Sports)
+instead of mixing everything by the original source's own grouping.
 """
 
+import re
 import urllib.request
 import sys
 
+# (source URL, category label to force on every channel from this source)
 SOURCES = [
-    "https://iptv-org.github.io/iptv/languages/dan.m3u",   # Danish
-    "https://iptv-org.github.io/iptv/languages/eng.m3u",   # English
-    "https://iptv-org.github.io/iptv/languages/tur.m3u",   # Turkish
-    "https://iptv-org.github.io/iptv/languages/kur.m3u",   # Kurdish
-    "https://iptv-org.github.io/iptv/categories/sports.m3u",  # Sports category
+    ("https://iptv-org.github.io/iptv/languages/dan.m3u", "Danish"),
+    ("https://iptv-org.github.io/iptv/languages/eng.m3u", "English"),
+    ("https://iptv-org.github.io/iptv/languages/tur.m3u", "Turkish"),
+    ("https://iptv-org.github.io/iptv/languages/kur.m3u", "Kurdish"),
+    ("https://iptv-org.github.io/iptv/categories/sports.m3u", "Sports"),
 ]
 
 OUTPUT_FILE = "playlist.m3u"
@@ -29,7 +29,7 @@ def fetch(url: str) -> str:
 
 
 def parse_entries(text: str):
-    """Yield (extinf_line, url_line) pairs from raw M3U text."""
+    """Yield (extinf_line, extra_tag_lines, url_line) tuples from raw M3U text."""
     lines = [l.rstrip("\n").rstrip("\r") for l in text.splitlines()]
     entries = []
     i = 0
@@ -37,7 +37,6 @@ def parse_entries(text: str):
         line = lines[i].strip()
         if line.startswith("#EXTINF"):
             extinf = line
-            # collect any extra tag lines (e.g. #EXTVLCOPT, #EXTGRP) until we hit the URL
             j = i + 1
             extra_tags = []
             while j < len(lines) and lines[j].strip().startswith("#"):
@@ -52,14 +51,25 @@ def parse_entries(text: str):
     return entries
 
 
+def set_group_title(extinf_line: str, category: str) -> str:
+    """Force the group-title attribute on an #EXTINF line to `category`."""
+    if 'group-title="' in extinf_line:
+        return re.sub(r'group-title="[^"]*"', f'group-title="{category}"', extinf_line, count=1)
+    # No group-title present: insert one right after the duration field.
+    match = re.match(r'(#EXTINF:-?\d+)(.*)', extinf_line)
+    if match:
+        return f'{match.group(1)} group-title="{category}"{match.group(2)}'
+    return extinf_line
+
+
 def main():
     seen_urls = set()
     merged = ["#EXTM3U"]
     total_before = 0
     total_after = 0
 
-    for src in SOURCES:
-        print(f"Fetching {src} ...", file=sys.stderr)
+    for src, category in SOURCES:
+        print(f"Fetching {src} (category: {category}) ...", file=sys.stderr)
         try:
             text = fetch(src)
         except Exception as e:
@@ -73,7 +83,7 @@ def main():
             if url in seen_urls:
                 continue
             seen_urls.add(url)
-            merged.append(extinf)
+            merged.append(set_group_title(extinf, category))
             merged.extend(extra_tags)
             merged.append(url)
             total_after += 1
