@@ -2,8 +2,11 @@
 """
 Merge multiple M3U playlists into one deduplicated playlist.m3u, tagging
 every channel with a fixed group-title so IPTV players display them as
-separate categories (Danish / English / Turkish / Kurdish / Sports)
-instead of mixing everything by the original source's own grouping.
+separate categories.
+
+Deduplication is done PER CATEGORY (not globally), so a channel that
+appears in both a language playlist and the Sports category will show
+up once in each -- but never twice within the same category.
 """
 
 import re
@@ -55,7 +58,6 @@ def set_group_title(extinf_line: str, category: str) -> str:
     """Force the group-title attribute on an #EXTINF line to `category`."""
     if 'group-title="' in extinf_line:
         return re.sub(r'group-title="[^"]*"', f'group-title="{category}"', extinf_line, count=1)
-    # No group-title present: insert one right after the duration field.
     match = re.match(r'(#EXTINF:-?\d+)(.*)', extinf_line)
     if match:
         return f'{match.group(1)} group-title="{category}"{match.group(2)}'
@@ -63,7 +65,7 @@ def set_group_title(extinf_line: str, category: str) -> str:
 
 
 def main():
-    seen_urls = set()
+    seen_per_category = {}  # category -> set of urls already added in that category
     merged = ["#EXTM3U"]
     total_before = 0
     total_after = 0
@@ -79,9 +81,11 @@ def main():
         entries = parse_entries(text)
         total_before += len(entries)
 
+        seen_urls = seen_per_category.setdefault(category, set())
+
         for extinf, extra_tags, url in entries:
             if url in seen_urls:
-                continue
+                continue  # duplicate within this same category, skip
             seen_urls.add(url)
             merged.append(set_group_title(extinf, category))
             merged.extend(extra_tags)
