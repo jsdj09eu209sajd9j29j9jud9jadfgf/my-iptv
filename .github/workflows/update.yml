@@ -2,25 +2,41 @@ name: Update IPTV Playlist
 
 on:
   schedule:
-    - cron: "0 3 * * *"
-  workflow_dispatch:
+    # Runs once a day at 04:00 UTC. Adjust as you like.
+    - cron: "0 4 * * *"
+  workflow_dispatch: {}   # lets you trigger it manually from the Actions tab
+  push:
+    branches: [main]
+    paths:
+      - "scripts/merge.py"
+      - ".github/workflows/update.yml"
+
+permissions:
+  contents: write
 
 jobs:
-  update:
+  update-playlist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Build playlist
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Merge playlists
+        run: python scripts/merge.py
+
+      - name: Commit and push if changed
         run: |
-          echo "#EXTM3U" > playlist.m3u
-          for url in           https://iptv-org.github.io/iptv/languages/dan.m3u           https://iptv-org.github.io/iptv/languages/eng.m3u           https://iptv-org.github.io/iptv/languages/tur.m3u           https://iptv-org.github.io/iptv/languages/kur.m3u           https://iptv-org.github.io/iptv/categories/sports.m3u
-          do
-            curl -s "$url" | tail -n +2 >> playlist.m3u
-          done
-      - name: Commit
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add playlist.m3u
-          git diff --cached --quiet || git commit -m "Update playlist"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update combined playlist"
+            git push
+          fi
