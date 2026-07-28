@@ -1,2 +1,1 @@
-# my-iptv
-Channels for IPTV Player
+# Combined IPTV Playlist
