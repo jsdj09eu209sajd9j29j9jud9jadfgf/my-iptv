@@ -5,14 +5,13 @@ Merge multiple M3U playlists into one deduplicated playlist.m3u.
 - Each language source is tagged with a fixed group-title.
 - The Sports source is auto-split into subcategories (Football, Basketball,
   Tennis, etc.) based on keyword matches in the channel name.
-- Aggregator/FAST-TV channels (Pluto TV, Tubi, Samsung TV Plus, etc.) are
-  detected by name and routed into their own "Other / Aggregators" category.
+- Aggregator/FAST-TV channels (Pluto TV, Tubi, Samsung TV Plus, South Park,
+  etc.) are detected by name and routed into their own "Other / Aggregators"
+  category.
 - EXTRA_CHANNELS lets you manually add standalone channels not covered by
-  any fetched source. For Show TV specifically, the URL is refreshed each
-  run by scrape_showtv.js (a headless-browser step that runs before this
-  script, since Show TV's stream URL includes a short-lived signed token).
-  If showtv_url.txt exists (freshly scraped this run), it's used; otherwise
-  the static FALLBACK_SHOWTV_URL below is used as a backup.
+  any fetched source (e.g. Show TV). For Show TV, the stream URL is
+  refreshed each run by scrape_showtv.js (headless-browser step that runs
+  before this script), with a static fallback if that scrape fails.
 - Within specific categories, certain channels can be pinned to appear
   first (see PRIORITY_ORDER below), with everything else keeping its
   normal relative order after them.
@@ -53,6 +52,7 @@ AGGREGATOR_KEYWORDS = [
     r"\bredbox\b",
     r"\bplex\b",
     r"\bfubo\b",
+    r"\bsouth\s?park\b",
 ]
 
 # Sports subcategory keywords. Order matters: first match wins.
@@ -74,10 +74,10 @@ SPORTS_KEYWORDS = [
 SPORTS_FALLBACK = "General"
 
 # Static backup used only if the headless-browser scrape (scrape_showtv.js)
-# didn't produce a fresh URL this run. Almost certainly expired -- it's
-# just there so the script never crashes for a missing file.
+# didn't produce a fresh URL this run.
 FALLBACK_SHOWTV_URL = "https://showtv.blutv.com/blutv_showtv_live/live.m3u8"
 SHOWTV_SCRAPED_FILE = "showtv_url.txt"
+SHOWTV_LOGO = "https://www.showtv.com.tr/assets/v4/images/common/logo/svg/show-tv-logo.svg"
 
 
 def get_showtv_url() -> str:
@@ -92,10 +92,67 @@ def get_showtv_url() -> str:
 
 
 # Standalone channels not covered by any fetched source.
-# (category, display name, url) -- url is resolved dynamically below for Show TV.
+# (category, display name, url, logo url or None)
+#
+# The Danish regional TV2 stations below are not in iptv-org at all --
+# they're sourced from a different open list, Free-TV/IPTV
+# (github.com/Free-TV/IPTV/blob/master/lists/denmark.md). Their URLs may
+# carry session tokens similar to Show TV's, so they could go stale over
+# time; not yet confirmed either way.
+#
+# NOTE: in that source list, "TV 2/Østjylland" and "TV/Midt-Vest" are
+# listed with the IDENTICAL stream URL -- almost certainly a copy-paste
+# error upstream, not intentional. Included as-is for now; flag it if
+# Østjylland just plays Midt-Vest's feed instead of its own.
 def get_extra_channels():
     return [
-        ("2. Tyrkisk", "Show TV", get_showtv_url()),
+        ("2. Tyrkisk", "Show TV", get_showtv_url(), SHOWTV_LOGO),
+
+        ("1. Dansk", "TV Syd+",
+         "https://cdn-lt-live.tvsyd.dk/env/cluster-1-e.live.nvp1/live/hls/p/1956351/e/0_e9slj9wh/tl/main/st/0/t/rFEtaqAbdhUFGef_BNF4WQ/index-s32.m3u8",
+         "https://i.imgur.com/k2jf591.png"),
+        ("1. Dansk", "TV 2 Fyn",
+         "https://cdn-lt-live.tv2fyn.dk/env/cluster-1-e.live.nvp1/live/hls/p/1966291/e/0_vsfrv0zm/tl/main/st/0/t/EgP1FA1D39taZFVewCa42w/index-s32.m3u8",
+         "https://i.imgur.com/4L6AIMH.png"),
+        ("1. Dansk", "TV 2 Lorry",
+         "https://cdn-lt-live.tv2lorry.dk/env/cluster-1-d.live.nvp1/live/hls/p/2045321/e/1_grusx1zd/tl/main/st/0/t/rCct87c-v2SFFCvQK1BBOg/index-s32.m3u8",
+         "https://i.imgur.com/oVmCoKY.png"),
+        ("1. Dansk", "TV Midtvest",
+         "https://cdn-lt-live.tvmidtvest.dk/env/cluster-1-d.live.frp1/live/hls/p/1953371/e/1_9x5lzos9/tl/main/st/0/t/9MTEhotxVwKuatx1EVXdGg/index-s34.m3u8",
+         "https://i.imgur.com/OU7xIVa.png"),
+        ("1. Dansk", "TV 2 Nord",
+         "https://cdn-lt-live.tv2nord.dk/env/cluster-1-e.live.nvp1/live/hls/p/1956931/e/1_h9yfe7h2/tl/main/st/1/t/_FUn1YHQ6_P6lES4U6mmsA/index-s32.m3u8",
+         "https://i.imgur.com/tEJ22UW.png"),
+        # WARNING: the source list gives this the exact same URL as
+        # Midt-Vest above. A trailing "#" fragment is appended purely so
+        # this entry doesn't get silently deduped away as an "exact
+        # duplicate" -- the underlying stream is still Midt-Vest's until
+        # a correct Østjylland-specific URL is found.
+        ("1. Dansk", "TV 2 Østjylland",
+         "https://cdn-lt-live.tvmidtvest.dk/env/cluster-1-d.live.frp1/live/hls/p/1953371/e/1_9x5lzos9/tl/main/st/0/t/9MTEhotxVwKuatx1EVXdGg/index-s34.m3u8#ostjylland",
+         "https://i.imgur.com/qEUXjHp.png"),
+        ("1. Dansk", "TV 2 Øst",
+         "https://cdn-lt-live.tveast.dk/env/cluster-1-e.live.nvp1/live/hls/p/1953381/e/0_zphj9q61/tl/main/st/0/t/THUB80e-ZMufZCE4pDhO0g/index-s32.m3u8",
+         "https://i.imgur.com/H9l6Ulw.png"),
+
+        # Additional channels from the same Free-TV/IPTV Denmark list.
+        # Skipped from that list (to avoid duplicates / dead links):
+        #  - DR1, DR2, DR Ramasjang: almost certainly already present via
+        #    the iptv-org dan.m3u fetch above (different URL, same
+        #    channel) -- adding them here risked showing "DR1" twice.
+        #  - TV 2 Kosmopol: same exact stream URL as "TV 2 Lorry" above,
+        #    just a different display name in the source list.
+        #  - TV 2/Bornholm: user already has this one separately.
+        #  - KKRtv: source list has no stream link for it at all.
+        ("1. Dansk", "Folketinget TV",
+         "https://cdnapi.kaltura.com/p/2158211/sp/327418300/playManifest/entryId/1_24gfa7qq/protocol/https/format/applehttp/a.m3u8",
+         "https://i.imgur.com/RqQDUzX.png"),
+        ("1. Dansk", "TV Storbyen",
+         "https://5eeb3940cfaa0.streamlock.net/webtv_live/_definst_/mp4:kanalnordvest/playlist.m3u8",
+         "https://i.imgur.com/QqjRqow.png"),
+        ("1. Dansk", "Kanal Hovedstaden",
+         "http://khkbh.dk:8080/hls/livestream/index.m3u8",
+         "https://i.imgur.com/MCXYDwH.png"),
     ]
 
 
@@ -103,11 +160,41 @@ def get_extra_channels():
 # patterns are pinned higher. Everything not matched keeps its normal
 # order, placed after all pinned channels.
 PRIORITY_ORDER = {
+    "1. Dansk": [
+        r"\bdr(\s|\d)",       # DR1, DR2, DR Ramasjang, etc.
+        # Main TV2 -- but NOT if it's actually one of the regional TV2
+        # stations below (those get their own dedicated rank instead).
+        r"\btv\s?2\b(?!\s*(fyn|lorry|midtvest|nord|syd|østjylland|øst))",
+        r"\btv2?\s?fyn\b",
+        r"\blorry\b",
+        r"\bmidt.?vest\b",
+        r"\btv2?\s?nord\b",
+        r"\btv2?\s?syd\b",
+        r"\btv2?\s?østjylland\b",
+        r"\btv2?\s?øst\b",
+    ],
     "2. Tyrkisk": [
         r"\btrt\s?1\b",
-        r"\batv\b",
+        r"\batv\b(?!\s*(avrupa|alanya))",   # ATV, but not ATV Avrupa / ATV Alanya
         r"\bstar\s?tv\b",
         r"\bshow\s?tv\b",
+    ],
+    "3. Kurdisk": [
+        r"\btrt\s?kurdi\b",
+        r"\bzarok\s?tv\b",
+    ],
+    "4. Engelsk": [
+        # Assumed "most known" -- adjust freely if you had different ones in mind.
+        r"\bbbc\s?one\b",
+        r"\bbbc\s?two\b",
+        r"\bcnn\b",
+        r"\bsky\s?news\b",
+        r"\bitv\b",
+        r"\bchannel\s?4\b",
+        r"\bfox\s?news\b",
+        r"\bal\s?jazeera\b",
+        r"\bfrance\s?24\b",
+        r"\bcnbc\b",
     ],
 }
 
@@ -208,12 +295,15 @@ def process_source(src, category_fn, seen_per_category, category_entries, stats)
 
 
 def add_extra_channels(seen_per_category, category_entries, stats):
-    for category, name, url in get_extra_channels():
+    for category, name, url, logo in get_extra_channels():
         seen_urls = seen_per_category.setdefault(category, set())
         if url in seen_urls:
             continue
         seen_urls.add(url)
-        extinf = f'#EXTINF:-1 group-title="{category}",{name}'
+        if logo:
+            extinf = f'#EXTINF:-1 tvg-logo="{logo}" group-title="{category}",{name}'
+        else:
+            extinf = f'#EXTINF:-1 group-title="{category}",{name}'
         bucket = category_entries.setdefault(category, [])
         bucket.append((extinf, [], url, name))
         stats["before"] += 1
