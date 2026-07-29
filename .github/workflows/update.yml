@@ -2,13 +2,13 @@ name: Update IPTV Playlist
 
 on:
   schedule:
-    # Runs once a day at 04:00 UTC. Adjust as you like.
     - cron: "0 */6 * * *"
-  workflow_dispatch: {}   # lets you trigger it manually from the Actions tab
+  workflow_dispatch: {}
   push:
     branches: [main]
     paths:
       - "scripts/merge.py"
+      - "scripts/scrape_showtv.js"
       - ".github/workflows/update.yml"
 
 permissions:
@@ -25,6 +25,21 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install --with-deps chromium
+
+      - name: Scrape fresh Show TV URL
+        run: node scripts/scrape_showtv.js
+        continue-on-error: true   # never block the whole run if the scrape fails
 
       - name: Merge playlists
         run: python scripts/merge.py
