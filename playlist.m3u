@@ -1,60 +1,16 @@
 #EXTM3U
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="dr1.dk" tvg-name="DR1" channelId="4093" tvg-logo="http://grevsen.dk/logos/dr1.png" group-title="1. Dansk",DR1
-http://grevsen.dk/live/catchuptv/catchuptv/1.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="dr2.dk" tvg-name="DR2" channelId="2739" tvg-logo="http://grevsen.dk/logos/dr2.png" group-title="1. Dansk",DR2
-http://grevsen.dk/live/catchuptv/catchuptv/2.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="drramasjang.dk" tvg-name="DR Ramasjang" channelId="4191" tvg-logo="http://grevsen.dk/logos/drramasjang.png" group-title="1. Dansk",DR Ramasjang
-http://grevsen.dk/live/catchuptv/catchuptv/3.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="dr1.dk" tvg-name="DR1 Syn" channelId="4093" tvg-logo="http://grevsen.dk/logos/dr1.png" group-title="1. Dansk",DR1 Syn
-http://grevsen.dk/live/catchuptv/catchuptv/18.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="dr2.dk" tvg-name="DR2 Syn" channelId="2739" tvg-logo="http://grevsen.dk/logos/dr2.png" group-title="1. Dansk",DR2 Syn
-http://grevsen.dk/live/catchuptv/catchuptv/19.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7"  tvg-id="drtv.dk" tvg-name="DR TV" channelId="" tvg-logo="http://grevsen.dk/logos/drtv.png" group-title="1. Dansk",DR TV
-http://grevsen.dk/live/catchuptv/catchuptv/20.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="dr1.dk" tvg-name="DR1 Syn" channelId="4093" tvg-logo="http://grevsen.dk/logos/dr1.png" group-title="1. Dansk",DR1 Syn 1 mb/s
-http://grevsen.dk/live/catchuptv/catchuptv/21.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="dr2.dk" tvg-name="DR2 Syn" channelId="2739" tvg-logo="http://grevsen.dk/logos/dr2.png" group-title="1. Dansk",DR2 Syn 1 mb/s
-http://grevsen.dk/live/catchuptv/catchuptv/22.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7"  tvg-id="drtv.dk" tvg-name="DR TV" channelId="" tvg-logo="http://grevsen.dk/logos/drtv.png" group-title="1. Dansk",DR TV 1 mb/s
-http://grevsen.dk/live/catchuptv/catchuptv/23.m3u8
 #EXTINF:-1 tvg-id="DR1.dk@SD" tvg-logo="https://i.imgur.com/OETzsOI.png" group-title="1. Dansk",DR1 (1080p) [Geo-blocked]
 https://drlivedr1hls.akamaized.net/hls/live/2113625/drlivedr1/master.m3u8
 #EXTINF:-1 tvg-id="DR2.dk@SD" tvg-logo="https://i.imgur.com/7bYtukP.png" group-title="1. Dansk",DR2 (1080p) [Geo-blocked]
 https://drlivedr2hls.akamaized.net/hls/live/2113623/drlivedr2/master.m3u8
 #EXTINF:-1 tvg-id="DRRamasjang.dk@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/8/82/DR_Ramasjang_2020.svg/960px-DR_Ramasjang_2020.svg.png" group-title="1. Dansk",DR Ramasjang (720p) [Geo-blocked]
 https://drlive03hls.akamaized.net/hls/live/2014190/drlive03/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/oVmCoKY.png" group-title="1. Dansk",TV 2 Lorry
+https://content.jwplatform.com/live/broadcast/P9pBJPnp.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/tEJ22UW.png" group-title="1. Dansk",TV 2 Nord
+https://content.jwplatform.com/live/broadcast/KFXZ5tL6.m3u8
 #EXTINF:-1 tvg-id="TV2Bornholm.dk@SD" tvg-logo="https://i.imgur.com/cEOpXU6.png" group-title="1. Dansk",TV 2/Bornholm (1080p) [Not 24/7]
 https://livecdn.euw1-0005.jwplive.com/live/sites/J42OBHtp/media/vvNWt4O9/live.isml/.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="tv2fyn.dk" tvg-name="TV2 fyn (HD)" channelId="4196" tvg-logo="http://grevsen.dk/logos/fyn.png" group-title="1. Dansk",TV2 Fyn
-http://grevsen.dk/live/catchuptv/catchuptv/11.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="tv2lorry.dk" tvg-name="TV2Lorry" channelId="4197" tvg-logo="http://grevsen.dk/logos/lorry.png" group-title="1. Dansk",TV2 Lorry
-http://grevsen.dk/live/catchuptv/catchuptv/12.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="tv2midtvest.dk" tvg-name="TV2MidtVest" channelId="4200" tvg-logo="http://grevsen.dk/logos/midtvest.png" group-title="1. Dansk",TV Midtvest
-http://grevsen.dk/live/catchuptv/catchuptv/13.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="TV2nord.dk" tvg-name="TV2nord" channelId="4223" tvg-logo="http://grevsen.dk/logos/salto.png" group-title="1. Dansk",TV2 Nord Salto
-http://grevsen.dk/live/catchuptv/catchuptv/14.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="tvsyd.dk" tvg-name="TV2Syd" channelId="4195" tvg-logo="http://grevsen.dk/logos/sydplus.png" group-title="1. Dansk",TV Syd+
-http://grevsen.dk/live/catchuptv/catchuptv/15.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="7" timeshift="7" tvg-id="TV2Ostjylland.dk" tvg-name="TV2 Ostjylland" channelId="4199" tvg-logo="http://grevsen.dk/logos/ostjylland.png" group-title="1. Dansk",TV2 Østjylland
-http://grevsen.dk/live/catchuptv/catchuptv/17.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="3" timeshift="3" tvg-id="TV2Ost.dk" tvg-name="TV2Ost" channelId="4134" tvg-logo="http://grevsen.dk/logos/ost.png" group-title="1. Dansk",TV2 Øst
-http://grevsen.dk/live/catchuptv/catchuptv/16.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="1" timeshift="1" tvg-id="tv2bornholm.dk" tvg-name="TV2bornholm" channelId="4198" tvg-logo="http://grevsen.dk/logos/bornholm.png" group-title="1. Dansk",TV2 Bornholm
-http://grevsen.dk/live/catchuptv/catchuptv/10.m3u8
-#EXTINF:-1 tvg-id="folketinget.dk" tvg-name="" channelId="4224" tvg-logo="http://grevsen.dk/logos/folketinget.png" group-title="1. Dansk",Folketinget
-http://grevsen.dk/live/catchuptv/catchuptv/4.m3u8
-#EXTINF:-1 tvg-id="kanalhovedstaden.dk" tvg-name="" channelId="4194" tvg-logo="http://grevsen.dk/logos/hovedstaden.png" group-title="1. Dansk",Kanal Hovedstaden
-http://grevsen.dk/live/catchuptv/catchuptv/5.m3u8
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="http://grevsen.dk/logos/kkrtv.png" group-title="1. Dansk",KKRtv
-http://grevsen.dk/live/catchuptv/catchuptv/6.m3u8
-#EXTINF:-1 tvg-id="KVF.fo" tvg-country="FO" tvg-language="Faroese" tvg-logo="https://i.imgur.com/Nb93Skv.jpg" group-title="1. Dansk",KVF FO
-http://grevsen.dk/live/catchuptv/catchuptv/7.m3u8
-#EXTINF:-1 catchup="append" catchup-source="?utc=${start}" catchup-days="1" timeshift="1" tvg-id="" tvg-name="" tvg-logo="https://i.imgur.com/OAgXaMO.png" group-title="1. Dansk",TV Aarhus
-http://grevsen.dk/live/catchuptv/catchuptv/8.m3u8
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://i.imgur.com/tvLkbh3.jpg" group-title="1. Dansk",TV Storbyen
-http://grevsen.dk/live/catchuptv/catchuptv/9.m3u8
-#EXTINF:-1 group-title="1. Dansk" tvg-logo="https://peach.blender.org/wp-content/uploads/poster_bunny_small.jpg",Big Buck Bunny (2008)
-http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
 #EXTINF:-1 tvg-id="7thHeaven.se@DK" tvg-logo="https://images.pluto.tv/channels/6728c9c85534bb0008b320a4/colorLogoPNG.png" group-title="1. Dansk",7th Heaven
 https://jmp2.uk/plu-6728c9c85534bb0008b320a4.m3u8
 #EXTINF:-1 tvg-id="2900Happiness.se@DK" tvg-logo="https://images.pluto.tv/channels/6720bc6cdaad7f000872a6e2/colorLogoPNG.png" group-title="1. Dansk",2900 Happiness
@@ -550,7 +506,7 @@ https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8
 #EXTINF:-1 tvg-id="StarTV.tr@SD" tvg-logo="https://i.imgur.com/9O3DHRB.png" group-title="2. Tyrkisk",Star TV (720p)
 https://dogus.daioncdn.net/startv/startv_720p.m3u8?&sid=8l4w3lst4co5&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3
 #EXTINF:-1 tvg-logo="https://www.showtv.com.tr/assets/v4/images/common/logo/svg/show-tv-logo.svg" group-title="2. Tyrkisk",Show TV
-https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&st=RBzhSuGauna0OGld-DJUVA&e=1664766175&tv=1&ppid=4797b8678706a7a0ec4ca5fe1d4fa51d&dfp_paln=AQzzBGQEZ-MDecL2Rptbgu-H4hRASjvpd1TS8eS9XjNMHckqv0b2A0qYeg6vcd_KDF6Yl7yIDChZ2t737IAWBuID4HwFDz8m-j5LKutphHagFgxz8cODiJKes7amup3klwE4ayyhcFhyw97aBXlrVNghPbgdzZnRQHbL0ViVrQaTcqKpyZJUU_zegPQJkZHQEYAOsa-wdFUmjtYCf1yxF8Isjy9gqIgST6I1yRbF1c-HMJxiHmBuaesARH8IVJTCaiju-pMMp_ubqGKG1BqPUQFv0nqsRFileEBLPpyCRQROtEiQTjapoLip0cGVn9_kUna3KmgNauxkUxw6J3PEMUXkCmxESBHT6FjBUtHzl_MTIIXr9-ImkMbq1MrVqgoVGQVccgSFoxAYydwyEeZ1FcoOxiH0lGHKgqWTZc9wqMJkQPpa34Z61PZbSYVSqBv3ndJRAA6oUUoxlI_4AWzt3RJxN5R3QH30Pxt5HWJ6I3t4Yt4Q3N09iGDaoyBr20jDMtTFsOUu0Fb2_7JmO6ijvRMF2jKOb0q43-yKM_nt77wo--x-5YqA-XuUd9JuWoV5lqxfIm7ITVsLCKA7S1eksnaebpQu1d-kBJDjkmXpohgwS3iuidA6JPhydqYUIwZkTR0qlymLQ14nK01yH6ncLkzN6nMpHvKOMCrlM-QItIE4LMPLExTNTP4faUSNqdnFZiiiOmGCYAySTN56LHfPg84F0NfOweFBgQS79mzobptkBolxpTZlPozgR6CaSdDFnefxAAS12SV3VDAUDSmOD8uoXI3oTi2nuHHg36J4TPn1O3Y7mwlfok0VaqF49xROFW8dBS3XTmtYX2BzafivFw5SCV2GOrnl6Yw1wx62qmFua5TVDFTn5x9i7_IJP9NEDee3cgIaewX3NPawuM8_KdOZE4_5dmqV1QNPKJC5JRLdPcXXepTbPP_M7Jv8Zrqf-QBkA6kZ4kEhK3P46QZ3NGkSIgmIiksdAWm14qbrbkhSsV4uNc8cCVuDt-mOOut-0SDi6OrCAF3rJCR9b0xGv2FtwE9JBJ_pwcxLQ2ZwZHp7u39YKVInstrgK98EHW4gG4uidgDA1MoE7ehkKt3KEMs2CCtDBtsg8i2OL5sprMMdID5Z92G1ImcgE8EUBxGzCxRUKAD7FXo7ZrJGxMv3gBflHdM-6GWRGXoc3Lu2Jqm8s5rb3JwODmGlF7W-WuwTR1fRJckAk_fQjLsuVeDjR_ccjwwh8gLp9mJFgIYbGM6ukM5x_0bW1hXDiKocqzf3U6a47DHfN_KHxE1TH4LjHtW8asYWJz_5_0gdzQLoTwqh7B9-jcjUtFkmnqTRn1gt9PnCCf5mG4fQPtNclpJvzTo_HG-eTEbmsUrtpVFm5FVJSUUgOgVq2RI05FNjWUOgGpmqknD2MahiCIs40a-DV-4qoznNBmQmmq-fwUrPE0BPuXd6_Rmm-a28fAX2jRmdupIJ9RyelEeFkwh4oFh-pg..
+https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&st=RBzhSuGauna0OGld-DJUVA&e=1664766175&tv=1&ppid=30c4c906d3190d0566f0686718cc1d4d&dfp_paln=AQzzBGQEjeNKBPBoloC_G6btRwYqyb_1WfBH1jIPuxPFwBtPUoLMRPhwNGKg01ycauHO-ADRJFhM0Gv5ify2T441MB6yxaD2YI_fDu9w7XF3kMTFRc64HhLm5ky1hXiBDRMjxfNc0kB2tSaph8Y3snd6EyYT12iIiTer8NgCapne-A2Tb8QeVJZnwuvql0XTa2NNszry70N7KA_Tfwxi2pXeXaDTmD7Jc2rHQEIYW5RRRSiljUA50GK1xmMofJ0dKlkE-3yInwJZmBUQqolo1ecMZ4DZwAjY9MhUAVd20rLVxNvAYS-ENveTaW5BxRcb9MIuZvw9kDPWklqXgZMkNFoQg-w8X-aD31ll5HhuymQuWaaD9CRfFWzgLM9OT9jlb_29L-JAde17S77wLZbyqp1nHj9zkjHCVpRjyUup6_ePSbBVEV2HimaDl5df8hbHJMdjy31IO6azFdY7SQ3DuLaSwpGDl4MLFH5K-6pfl3pTFeNXQpNO_PqhY6Qwr29C7NWpysgE8mL4uxMYg3BUoe1VRULHmInls89Xujn0o8cnGRi19rFMgVZeQt18U1rxOCPl_Q71lPoYi0f0v7dyiVPynPNH3UtrU4VG0FIzONGG8cTCUXRIioR8G8OJxKGEvNNdgXNKguhsThJBlSS5lI4cFdLMkl6Ny0kFdU_f2Cyj9GPxZfnXJ9nf7pKUih9OsDOGGeEXRpcaVVd_oCljWcXyQGo8mq6PULZa70YQbgR0nrZw7pb_un-t_9bvPIn38Kifk9v0fuprxYCQkuTvHdyZBFQZ_oCao3yRn0zPran33rssnprwOGqTSci15JEvSZO3fhZEwEJ9JVYC0ETzAkwlbpjAvosPw3lB6krtUG4q9QYXCDt6ruS8_AetircTOx0e6Dt2n5QJa8cnyywJ6nQBH6O6nlrFOgtVudhXx4bQO6CJNVc3n6HCGbwvMnzP3NRLKIPCZNlyPoAl6VCLAeA8EFnVqzIr6NZ6dvOmzhq-JsrJN1drc5qA9FCEjTiuhItkBp1FlV9ylpGDM_OcZLg_ZGAeoA_duufqS4_jj3UYFYp2pOJuhXWrRrY2l0NU4Garr_FNedNcF99kea2vhek5UI0COKMF3PUnHRPqtUgP4G-roSFU9rqqMebv0vSAVoMZjndnTFR_Fu9BJcN4jZUfTy7O13tHRrrwxp2LLlvW5wvkf6svXqI03cUj5ELjJfH_rOrHq5fYwFzo3Uh28W8_skg5QyBnD7FWTK6FBQIfRcVZ2egSBUhKp-fDEhy2UdbVBfsGnNgonFQwTLOJtiCxy4cOFyjr-IA9qXBkOm8w6xNwlzs8CMdSWt15K_cv1K0Lm_xOoB7m9ppLyySRcElftik0nFlJ0dwOOL67TrkixvcKmOtbUNlFpjiH4i-z-6-ZBQm-W2iMUlqyp4zSAnqLQKNQ4c4rfssMzjSAs4M1rsLgu_BaGakKzQ17mFFxxOEa6UHEy2RZ9RiuSaU4
 #EXTINF:-1 tvg-id="KanalD.tr@SD" tvg-logo="https://i.imgur.com/9o1atM6.png" group-title="2. Tyrkisk",Kanal D (1080p)
 https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3
 #EXTINF:-1 tvg-id="KanalDDrama.tr@SD" tvg-logo="https://i.imgur.com/WIeZMKT.png" group-title="2. Tyrkisk",Vive Kanal D Drama (1080p)
