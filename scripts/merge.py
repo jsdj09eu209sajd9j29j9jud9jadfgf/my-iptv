@@ -94,10 +94,17 @@ def load_scraped_channels() -> dict:
 SCRAPED = load_scraped_channels()
 
 SHOWTV_LOGO = "https://www.showtv.com.tr/assets/v4/images/common/logo/svg/show-tv-logo.svg"
+# Used only if scrape_channels.js failed to capture a fresh Show TV URL
+# this run -- better to show a possibly-stale link than none at all,
+# since we do have one known-working URL to fall back to. (No such
+# fallback exists for the 7 regional TV2 stations, so those are simply
+# skipped if their scrape fails.)
+FALLBACK_SHOWTV_URL = "https://showtv.blutv.com/blutv_showtv_live/live.m3u8"
 
 # (category, display name, scrape key, logo url or None)
 # If a key isn't in channels.json this run (scrape failed), the channel
-# is skipped entirely for this run rather than shown broken.
+# is skipped entirely for this run rather than shown broken -- EXCEPT
+# Show TV, which has a static fallback below.
 SCRAPED_EXTRA_CHANNELS = [
     ("2. Tyrkisk", "Show TV",        "showtv",        SHOWTV_LOGO),
     ("1. Dansk",   "TV 2 Fyn",       "tv2fyn",        "https://i.imgur.com/4L6AIMH.png"),
@@ -108,6 +115,11 @@ SCRAPED_EXTRA_CHANNELS = [
     ("1. Dansk",   "TV Midtvest",   "tvmidtvest",    "https://i.imgur.com/OU7xIVa.png"),
     ("1. Dansk",   "TV 2 Lorry",     "tv2lorry",      "https://i.imgur.com/oVmCoKY.png"),
 ]
+
+# Scraped keys that have a static fallback if the scrape fails this run.
+FALLBACKS = {
+    "showtv": FALLBACK_SHOWTV_URL,
+}
 
 # Static, non-scraped extras (no known better source yet).
 STATIC_EXTRA_CHANNELS = [
@@ -120,11 +132,13 @@ STATIC_EXTRA_CHANNELS = [
 def get_extra_channels():
     channels = []
     for category, name, key, logo in SCRAPED_EXTRA_CHANNELS:
-        url = SCRAPED.get(key)
+        url = SCRAPED.get(key) or FALLBACKS.get(key)
         if url:
+            if key not in SCRAPED:
+                print(f"'{name}': using static fallback URL (scrape failed this run).", file=sys.stderr)
             channels.append((category, name, url, logo))
         else:
-            print(f"Skipping '{name}' this run -- no scraped URL available for key '{key}'.", file=sys.stderr)
+            print(f"Skipping '{name}' this run -- no scraped URL and no fallback available for key '{key}'.", file=sys.stderr)
     channels.extend(STATIC_EXTRA_CHANNELS)
     return channels
 
