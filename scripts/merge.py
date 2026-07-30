@@ -30,16 +30,16 @@ import sys
 
 # Language sources: (url, fixed category label)
 LANGUAGE_SOURCES = [
-    ("https://iptv-org.github.io/iptv/languages/dan.m3u", "Dansk"),
-    ("https://iptv-org.github.io/iptv/languages/tur.m3u", "Tyrkisk"),
-    ("https://iptv-org.github.io/iptv/languages/kur.m3u", "Kurdisk"),
-    ("https://iptv-org.github.io/iptv/languages/eng.m3u", "Engelsk"),
+    ("https://iptv-org.github.io/iptv/languages/dan.m3u", "1. Dansk"),
+    ("https://iptv-org.github.io/iptv/languages/tur.m3u", "2. Tyrkisk"),
+    ("https://iptv-org.github.io/iptv/languages/kur.m3u", "3. Kurdisk"),
+    ("https://iptv-org.github.io/iptv/languages/eng.m3u", "4. Engelsk"),
 ]
 
 SPORTS_SOURCE = "https://iptv-org.github.io/iptv/categories/sports.m3u"
-SPORTS_PREFIX = "Sports"
+SPORTS_PREFIX = "5. Sports"
 
-AGGREGATOR_CATEGORY = "Andre - Spam"
+AGGREGATOR_CATEGORY = "6. Other - Aggregators"
 
 AGGREGATOR_KEYWORDS = [
     r"\bpluto\s?tv\b",
@@ -93,7 +93,7 @@ def load_scraped_channels() -> dict:
 
 SCRAPED = load_scraped_channels()
 
-SHOWTV_LOGO = "https://www.showtv.com.tr/assets/v4/images/common/logo/svg/show-tv-logo.svg"
+SHOWTV_LOGO = "https://commons.wikimedia.org/wiki/Special:FilePath/Logo_of_Show_TV.png"
 # Used only if scrape_channels.js failed to capture a fresh Show TV URL
 # this run -- better to show a possibly-stale link than none at all,
 # since we do have one known-working URL to fall back to. (No such
@@ -106,14 +106,15 @@ FALLBACK_SHOWTV_URL = "https://showtv.blutv.com/blutv_showtv_live/live.m3u8"
 # is skipped entirely for this run rather than shown broken -- EXCEPT
 # Show TV, which has a static fallback below.
 SCRAPED_EXTRA_CHANNELS = [
-    ("Tyrkisk", "Show TV",        "showtv",        SHOWTV_LOGO),
-    ("Dansk",   "TV 2 Fyn",       "tv2fyn",        "https://i.imgur.com/4L6AIMH.png"),
-    ("Dansk",   "TV 2 Nord",      "tv2nord",       "https://i.imgur.com/tEJ22UW.png"),
-    ("Dansk",   "TV Syd+",        "tvsyd",         "https://i.imgur.com/k2jf591.png"),
-    ("Dansk",   "TV 2 Østjylland","tv2ostjylland", "https://i.imgur.com/qEUXjHp.png"),
-    ("Dansk",   "TV 2 Øst",       "tv2ost",        "https://i.imgur.com/H9l6Ulw.png"),
-    ("Dansk",   "TV Midtvest",   "tvmidtvest",    "https://i.imgur.com/OU7xIVa.png"),
-    ("Dansk",   "TV 2 Lorry",     "tv2lorry",      "https://i.imgur.com/oVmCoKY.png"),
+    ("2. Tyrkisk", "Show TV",        "showtv",        SHOWTV_LOGO),
+    ("1. Dansk",   "TV 2 Fyn",       "tv2fyn",        "https://i.imgur.com/4L6AIMH.png"),
+    ("1. Dansk",   "TV 2 Nord",      "tv2nord",       "https://i.imgur.com/tEJ22UW.png"),
+    ("1. Dansk",   "TV Syd+",        "tvsyd",         "https://i.imgur.com/k2jf591.png"),
+    ("1. Dansk",   "TV 2 Østjylland","tv2ostjylland", "https://i.imgur.com/qEUXjHp.png"),
+    ("1. Dansk",   "TV 2 Øst",       "tv2ost",        "https://i.imgur.com/H9l6Ulw.png"),
+    ("1. Dansk",   "TV Midtvest",   "tvmidtvest",    "https://i.imgur.com/OU7xIVa.png"),
+    ("1. Dansk",   "TV 2 Lorry",     "tv2lorry",      "https://i.imgur.com/oVmCoKY.png"),
+    ("1. Dansk",   "DR Ramasjang",   "drramasjang",   "https://i.imgur.com/YD0z2mN.png"),
 ]
 
 # Scraped keys that have a static fallback if the scrape fails this run.
@@ -123,7 +124,7 @@ FALLBACKS = {
 
 # Static, non-scraped extras (no known better source yet).
 STATIC_EXTRA_CHANNELS = [
-    ("Dansk", "TV Storbyen",
+    ("1. Dansk", "TV Storbyen",
      "https://5eeb3940cfaa0.streamlock.net/webtv_live/_definst_/mp4:kanalnordvest/playlist.m3u8",
      "https://i.imgur.com/QqjRqow.png"),
 ]
@@ -147,7 +148,7 @@ def get_extra_channels():
 # patterns are pinned higher. Everything not matched keeps its normal
 # order, placed after all pinned channels.
 PRIORITY_ORDER = {
-    "Dansk": [
+    "1. Dansk": [
         r"\bdr(tv\b|\d|\s)",  # DR1, DR2, DR Ramasjang, and plain "DRTV"
         r"\btv\s?2\b(?!\s*(fyn|lorry|midtvest|nord|syd|østjylland|øst|bornholm))",
         r"\btv\s?2?\s?fyn\b",
@@ -159,7 +160,7 @@ PRIORITY_ORDER = {
         r"\btv\s?2?\s?øst\b",
         r"\btv\s?2?\s?bornholm\b",
     ],
-    "Tyrkisk": [
+    "2. Tyrkisk": [
         r"\btrt\s?1\b",
         r"\batv\b(?!\s*(avrupa|alanya))",
         r"\bstar\s?tv\b",
@@ -172,11 +173,30 @@ PRIORITY_ORDER = {
         r"\btv\s?8\b",
         r"\bkanal\s?7\b",
     ],
-    "Kurdisk": [
+    "3. Kurdisk": [
+        # Best-effort grouping by broadcast origin region. I'm not fully
+        # confident about every channel's exact affiliation -- these are
+        # based on generally known public info about where each channel
+        # broadcasts from, not a political statement. Tell me if any of
+        # these are wrong and I'll correct them.
+        # -- Bakur (Turkey) --
         r"\btrt\s?kurd",
         r"\bzarok\s?tv\b",
+        # -- Rojava (Syria) --
+        r"\bronahi\s?tv\b",
+        # -- Başur (Iraq/KRG) --
+        r"\bkurdistan\s?tv\b",
+        r"\bkurdsat\b",
+        r"\brudaw\b",
+        r"\bnrt\b",
+        r"\bk24\b",
+        r"\bkurdistan\s?24\b",
+        r"\bwaar\s?tv\b",
+        r"\bpayam\b",
+        # -- Rojhelat (Iran) -- none confidently identified yet in the
+        # source list; add a pattern here if you know of one.
     ],
-    "Engelsk": [
+    "4. Engelsk": [
         r"\bbbc\s?one\b",
         r"\bbbc\s?two\b",
         r"\bcnn\b",
@@ -187,6 +207,16 @@ PRIORITY_ORDER = {
         r"\bal\s?jazeera\b",
         r"\bfrance\s?24\b",
         r"\bcnbc\b",
+    ],
+    f"{SPORTS_PREFIX} - General": [
+        # Assumed "most known/relevant" -- adjust if you had others in mind.
+        r"\bespn\b",
+        r"\bsky\s?sports\b",
+        r"\bbein\s?sports?\b",
+        r"\beurosport\b",
+        r"\bfox\s?sports\b",
+        r"\bdazn\b",
+        r"\btnt\s?sports\b",
     ],
 }
 
@@ -325,6 +355,11 @@ def main():
     category_entries = {}
     stats = {"before": 0, "after": 0}
 
+    # Extra/scraped channels are processed FIRST, so they win the
+    # name-based dedup below if iptv-org's dan.m3u also has a channel
+    # with the same name but a dead/different URL (e.g. DR Ramasjang).
+    add_extra_channels(seen_urls_per_category, seen_names_per_category, category_entries, stats)
+
     for src, category in LANGUAGE_SOURCES:
         process_source(
             src, lambda extinf, cat=category: cat,
@@ -340,8 +375,6 @@ def main():
         SPORTS_SOURCE, sports_category,
         seen_urls_per_category, seen_names_per_category, category_entries, stats,
     )
-
-    add_extra_channels(seen_urls_per_category, seen_names_per_category, category_entries, stats)
 
     merged = ["#EXTM3U"]
     for category, entries in category_entries.items():
