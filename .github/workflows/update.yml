@@ -8,7 +8,7 @@ on:
     branches: [main]
     paths:
       - "scripts/merge.py"
-      - "scripts/scrape_showtv.js"
+      - "scripts/scrape_channels.js"
       - ".github/workflows/update.yml"
 
 permissions:
