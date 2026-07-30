@@ -134,7 +134,7 @@ def get_extra_channels():
 # order, placed after all pinned channels.
 PRIORITY_ORDER = {
     "1. Dansk": [
-        r"\bdr(\s|\d)",       # DR1, DR2, DR Ramasjang, etc.
+        r"\bdr(tv\b|\d|\s)",  # DR1, DR2, DR Ramasjang, and plain "DRTV"
         r"\btv\s?2\b(?!\s*(fyn|lorry|midtvest|nord|syd|østjylland|øst|bornholm))",
         r"\btv\s?2?\s?fyn\b",
         r"\blorry\b",
