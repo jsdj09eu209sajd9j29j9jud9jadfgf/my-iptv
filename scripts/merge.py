@@ -30,16 +30,16 @@ import sys
 
 # Language sources: (url, fixed category label)
 LANGUAGE_SOURCES = [
-    ("https://iptv-org.github.io/iptv/languages/dan.m3u", "1. Dansk"),
-    ("https://iptv-org.github.io/iptv/languages/tur.m3u", "2. Tyrkisk"),
-    ("https://iptv-org.github.io/iptv/languages/kur.m3u", "3. Kurdisk"),
-    ("https://iptv-org.github.io/iptv/languages/eng.m3u", "4. Engelsk"),
+    ("https://iptv-org.github.io/iptv/languages/dan.m3u", "Dansk"),
+    ("https://iptv-org.github.io/iptv/languages/tur.m3u", "Tyrkisk"),
+    ("https://iptv-org.github.io/iptv/languages/kur.m3u", "Kurdisk"),
+    ("https://iptv-org.github.io/iptv/languages/eng.m3u", "Engelsk"),
 ]
 
 SPORTS_SOURCE = "https://iptv-org.github.io/iptv/categories/sports.m3u"
-SPORTS_PREFIX = "5. Sports"
+SPORTS_PREFIX = "Sports"
 
-AGGREGATOR_CATEGORY = "6. Other - Aggregators"
+AGGREGATOR_CATEGORY = "Andre - Spam"
 
 AGGREGATOR_KEYWORDS = [
     r"\bpluto\s?tv\b",
@@ -106,14 +106,14 @@ FALLBACK_SHOWTV_URL = "https://showtv.blutv.com/blutv_showtv_live/live.m3u8"
 # is skipped entirely for this run rather than shown broken -- EXCEPT
 # Show TV, which has a static fallback below.
 SCRAPED_EXTRA_CHANNELS = [
-    ("2. Tyrkisk", "Show TV",        "showtv",        SHOWTV_LOGO),
-    ("1. Dansk",   "TV 2 Fyn",       "tv2fyn",        "https://i.imgur.com/4L6AIMH.png"),
-    ("1. Dansk",   "TV 2 Nord",      "tv2nord",       "https://i.imgur.com/tEJ22UW.png"),
-    ("1. Dansk",   "TV Syd+",        "tvsyd",         "https://i.imgur.com/k2jf591.png"),
-    ("1. Dansk",   "TV 2 Østjylland","tv2ostjylland", "https://i.imgur.com/qEUXjHp.png"),
-    ("1. Dansk",   "TV 2 Øst",       "tv2ost",        "https://i.imgur.com/H9l6Ulw.png"),
-    ("1. Dansk",   "TV Midtvest",   "tvmidtvest",    "https://i.imgur.com/OU7xIVa.png"),
-    ("1. Dansk",   "TV 2 Lorry",     "tv2lorry",      "https://i.imgur.com/oVmCoKY.png"),
+    ("Tyrkisk", "Show TV",        "showtv",        SHOWTV_LOGO),
+    ("Dansk",   "TV 2 Fyn",       "tv2fyn",        "https://i.imgur.com/4L6AIMH.png"),
+    ("Dansk",   "TV 2 Nord",      "tv2nord",       "https://i.imgur.com/tEJ22UW.png"),
+    ("Dansk",   "TV Syd+",        "tvsyd",         "https://i.imgur.com/k2jf591.png"),
+    ("Dansk",   "TV 2 Østjylland","tv2ostjylland", "https://i.imgur.com/qEUXjHp.png"),
+    ("Dansk",   "TV 2 Øst",       "tv2ost",        "https://i.imgur.com/H9l6Ulw.png"),
+    ("Dansk",   "TV Midtvest",   "tvmidtvest",    "https://i.imgur.com/OU7xIVa.png"),
+    ("Dansk",   "TV 2 Lorry",     "tv2lorry",      "https://i.imgur.com/oVmCoKY.png"),
 ]
 
 # Scraped keys that have a static fallback if the scrape fails this run.
@@ -123,7 +123,7 @@ FALLBACKS = {
 
 # Static, non-scraped extras (no known better source yet).
 STATIC_EXTRA_CHANNELS = [
-    ("1. Dansk", "TV Storbyen",
+    ("Dansk", "TV Storbyen",
      "https://5eeb3940cfaa0.streamlock.net/webtv_live/_definst_/mp4:kanalnordvest/playlist.m3u8",
      "https://i.imgur.com/QqjRqow.png"),
 ]
@@ -147,7 +147,7 @@ def get_extra_channels():
 # patterns are pinned higher. Everything not matched keeps its normal
 # order, placed after all pinned channels.
 PRIORITY_ORDER = {
-    "1. Dansk": [
+    "Dansk": [
         r"\bdr(tv\b|\d|\s)",  # DR1, DR2, DR Ramasjang, and plain "DRTV"
         r"\btv\s?2\b(?!\s*(fyn|lorry|midtvest|nord|syd|østjylland|øst|bornholm))",
         r"\btv\s?2?\s?fyn\b",
@@ -159,7 +159,7 @@ PRIORITY_ORDER = {
         r"\btv\s?2?\s?øst\b",
         r"\btv\s?2?\s?bornholm\b",
     ],
-    "2. Tyrkisk": [
+    "Tyrkisk": [
         r"\btrt\s?1\b",
         r"\batv\b(?!\s*(avrupa|alanya))",
         r"\bstar\s?tv\b",
@@ -172,11 +172,11 @@ PRIORITY_ORDER = {
         r"\btv\s?8\b",
         r"\bkanal\s?7\b",
     ],
-    "3. Kurdisk": [
+    "Kurdisk": [
         r"\btrt\s?kurd",
         r"\bzarok\s?tv\b",
     ],
-    "4. Engelsk": [
+    "Engelsk": [
         r"\bbbc\s?one\b",
         r"\bbbc\s?two\b",
         r"\bcnn\b",
