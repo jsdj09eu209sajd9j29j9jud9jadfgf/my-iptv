@@ -3,25 +3,26 @@
 Merge multiple M3U playlists into one deduplicated playlist.m3u.
 
 - Each language source is tagged with a fixed group-title.
-- grevsen.dk provides a real, fetchable M3U for Danish regional TV2
-  stations (Fyn, Lorry, Midtvest, Nord, Syd, Østjylland, Bornholm, Øst)
-  plus DR1/DR2/DR Ramasjang with catchup -- far more reliable than
-  hardcoded stream URLs, which go stale.
+- Show TV and the Danish regional TV2 stations (Fyn, Nord, Syd,
+  Østjylland, Øst, Midtvest, Lorry) all use JavaScript-generated stream
+  URLs with short-lived tokens. scrape_channels.js (a headless-browser
+  step that runs before this script) visits each station's official live
+  page and captures a fresh URL, writing them to channels.json. If a
+  channel isn't in that file (scrape failed this run), it's simply
+  skipped rather than served a stale/broken link.
 - The Sports source is auto-split into subcategories based on keyword
   matches in the channel name.
 - Aggregator/FAST-TV channels (Pluto TV, Tubi, South Park, etc.) are
   routed into their own "Other / Aggregators" category.
-- Show TV's URL is refreshed each run via scrape_showtv.js (headless
-  browser), since it uses a short-lived signed token.
 - Deduplication is done PER CATEGORY, by BOTH exact URL match AND
-  normalized channel name -- so if the same channel (e.g. "DR1") shows
-  up from two different sources with two different URLs, it still only
-  appears once (first source processed wins).
+  normalized channel name, so the same channel from two different
+  sources never shows up twice.
 - PRIORITY_ORDER pins specific channels to the top of specific
   categories, in a defined order; everything else keeps its normal
   relative order after them.
 """
 
+import json
 import os
 import re
 import urllib.request
@@ -34,11 +35,6 @@ LANGUAGE_SOURCES = [
     ("https://iptv-org.github.io/iptv/languages/kur.m3u", "3. Kurdisk"),
     ("https://iptv-org.github.io/iptv/languages/eng.m3u", "4. Engelsk"),
 ]
-
-# Fetched BEFORE dan.m3u so its versions of DR1/DR2/DR Ramasjang (which
-# have catchup/archive) win the name-based dedup over iptv-org's copies.
-GREVSEN_SOURCE = "http://grevsen.dk/DRTV/public.m3u"
-GREVSEN_CATEGORY = "1. Dansk"
 
 SPORTS_SOURCE = "https://iptv-org.github.io/iptv/categories/sports.m3u"
 SPORTS_PREFIX = "5. Sports"
@@ -80,37 +76,57 @@ SPORTS_KEYWORDS = [
 ]
 SPORTS_FALLBACK = "General"
 
-FALLBACK_SHOWTV_URL = "https://showtv.blutv.com/blutv_showtv_live/live.m3u8"
-SHOWTV_SCRAPED_FILE = "showtv_url.txt"
+SCRAPED_CHANNELS_FILE = "channels.json"
+
+
+def load_scraped_channels() -> dict:
+    if os.path.exists(SCRAPED_CHANNELS_FILE):
+        try:
+            with open(SCRAPED_CHANNELS_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                print(f"Loaded {len(data)} freshly scraped channel URLs.", file=sys.stderr)
+                return data
+        except Exception as e:
+            print(f"WARNING: failed to read {SCRAPED_CHANNELS_FILE}: {e}", file=sys.stderr)
+    return {}
+
+
+SCRAPED = load_scraped_channels()
+
 SHOWTV_LOGO = "https://www.showtv.com.tr/assets/v4/images/common/logo/svg/show-tv-logo.svg"
 
+# (category, display name, scrape key, logo url or None)
+# If a key isn't in channels.json this run (scrape failed), the channel
+# is skipped entirely for this run rather than shown broken.
+SCRAPED_EXTRA_CHANNELS = [
+    ("2. Tyrkisk", "Show TV",        "showtv",        SHOWTV_LOGO),
+    ("1. Dansk",   "TV 2 Fyn",       "tv2fyn",        "https://i.imgur.com/4L6AIMH.png"),
+    ("1. Dansk",   "TV 2 Nord",      "tv2nord",       "https://i.imgur.com/tEJ22UW.png"),
+    ("1. Dansk",   "TV Syd+",        "tvsyd",         "https://i.imgur.com/k2jf591.png"),
+    ("1. Dansk",   "TV 2 Østjylland","tv2ostjylland", "https://i.imgur.com/qEUXjHp.png"),
+    ("1. Dansk",   "TV 2 Øst",       "tv2ost",        "https://i.imgur.com/H9l6Ulw.png"),
+    ("1. Dansk",   "TV Midtvest",   "tvmidtvest",    "https://i.imgur.com/OU7xIVa.png"),
+    ("1. Dansk",   "TV 2 Lorry",     "tv2lorry",      "https://i.imgur.com/oVmCoKY.png"),
+]
 
-def get_showtv_url() -> str:
-    if os.path.exists(SHOWTV_SCRAPED_FILE):
-        with open(SHOWTV_SCRAPED_FILE, "r", encoding="utf-8") as f:
-            url = f.read().strip()
-            if url:
-                print(f"Using freshly scraped Show TV URL: {url}", file=sys.stderr)
-                return url
-    print("No freshly scraped Show TV URL found -- using static fallback (likely stale).", file=sys.stderr)
-    return FALLBACK_SHOWTV_URL
+# Static, non-scraped extras (no known better source yet).
+STATIC_EXTRA_CHANNELS = [
+    ("1. Dansk", "TV Storbyen",
+     "https://5eeb3940cfaa0.streamlock.net/webtv_live/_definst_/mp4:kanalnordvest/playlist.m3u8",
+     "https://i.imgur.com/QqjRqow.png"),
+]
 
 
-# Standalone channels not covered by any fetched source.
-# (category, display name, url, logo url or None)
-#
-# Most Danish regional channels moved to the grevsen.dk fetch above
-# (more reliable, has catchup). TV Storbyen has no known alternative
-# source yet, so it stays here from the original Free-TV/IPTV list --
-# unverified, may not work.
 def get_extra_channels():
-    return [
-        ("2. Tyrkisk", "Show TV", get_showtv_url(), SHOWTV_LOGO),
-
-        ("1. Dansk", "TV Storbyen",
-         "https://5eeb3940cfaa0.streamlock.net/webtv_live/_definst_/mp4:kanalnordvest/playlist.m3u8",
-         "https://i.imgur.com/QqjRqow.png"),
-    ]
+    channels = []
+    for category, name, key, logo in SCRAPED_EXTRA_CHANNELS:
+        url = SCRAPED.get(key)
+        if url:
+            channels.append((category, name, url, logo))
+        else:
+            print(f"Skipping '{name}' this run -- no scraped URL available for key '{key}'.", file=sys.stderr)
+    channels.extend(STATIC_EXTRA_CHANNELS)
+    return channels
 
 
 # category -> ordered list of regex patterns; channels matching earlier
@@ -119,7 +135,6 @@ def get_extra_channels():
 PRIORITY_ORDER = {
     "1. Dansk": [
         r"\bdr(\s|\d)",       # DR1, DR2, DR Ramasjang, etc.
-        # Main TV2 -- but NOT any of the regional stations below.
         r"\btv\s?2\b(?!\s*(fyn|lorry|midtvest|nord|syd|østjylland|øst|bornholm))",
         r"\btv\s?2?\s?fyn\b",
         r"\blorry\b",
@@ -132,12 +147,11 @@ PRIORITY_ORDER = {
     ],
     "2. Tyrkisk": [
         r"\btrt\s?1\b",
-        r"\batv\b(?!\s*(avrupa|alanya))",   # ATV, but not ATV Avrupa / ATV Alanya
+        r"\batv\b(?!\s*(avrupa|alanya))",
         r"\bstar\s?tv\b",
         r"\bshow\s?tv\b",
         r"\bkanal\s?d\b",
         r"\bnow\s?tv\b",
-        # A few more well-known ones added below Kanal D / Now TV.
         r"\bntv\b",
         r"\bhabert[üu]rk\b",
         r"\btrt\s?2\b",
@@ -145,7 +159,7 @@ PRIORITY_ORDER = {
         r"\bkanal\s?7\b",
     ],
     "3. Kurdisk": [
-        r"\btrt\s?kurd",      # no trailing \b: also matches "Kurdî" (accented i)
+        r"\btrt\s?kurd",
         r"\bzarok\s?tv\b",
     ],
     "4. Engelsk": [
@@ -196,8 +210,6 @@ def channel_display_name(extinf_line: str) -> str:
 
 
 def normalize_name(name: str) -> str:
-    """Collapse naming variations (TV 2/Fyn vs TV2 Fyn vs tv2fyn) so
-    name-based dedup catches them as the same channel."""
     return re.sub(r"[^a-zæøå0-9]", "", name.lower())
 
 
@@ -228,7 +240,9 @@ def priority_rank(category: str, channel_name: str) -> int:
     patterns = PRIORITY_ORDER.get(category)
     if not patterns:
         return 0
-    name_lower = channel_name.lower()
+    # Normalize slashes to spaces so names like "TV 2/Bornholm" or
+    # "TV 2/Fyn" still match patterns written with spaces.
+    name_lower = channel_name.lower().replace("/", " ")
     for idx, pat in enumerate(patterns):
         if re.search(pat, name_lower):
             return idx
@@ -296,14 +310,6 @@ def main():
     seen_names_per_category = {}
     category_entries = {}
     stats = {"before": 0, "after": 0}
-
-    # Grevsen first, so its DR1/DR2/DR Ramasjang + regional TV2 entries
-    # win the name-based dedup over iptv-org's dan.m3u copies.
-    process_source(
-        GREVSEN_SOURCE,
-        lambda extinf: GREVSEN_CATEGORY,
-        seen_urls_per_category, seen_names_per_category, category_entries, stats,
-    )
 
     for src, category in LANGUAGE_SOURCES:
         process_source(
