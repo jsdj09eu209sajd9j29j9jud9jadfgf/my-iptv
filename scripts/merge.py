@@ -149,7 +149,8 @@ def get_extra_channels():
 # order, placed after all pinned channels.
 PRIORITY_ORDER = {
     "1. Dansk": [
-        r"\bdr(tv\b|\d|\s)",  # DR1, DR2, DR Ramasjang, and plain "DRTV"
+        r"\bdr(tv\b|\d|\s(?!ramasjang))",  # DR1, DR2, DRTV, DR K, etc. -- NOT Ramasjang
+        r"\bramasjang\b",     # kept just behind the other DR channels, not first
         r"\btv\s?2\b(?!\s*(fyn|lorry|midtvest|nord|syd|østjylland|øst|bornholm))",
         r"\btv\s?2?\s?fyn\b",
         r"\blorry\b",
@@ -197,16 +198,19 @@ PRIORITY_ORDER = {
         # source list; add a pattern here if you know of one.
     ],
     "4. Engelsk": [
-        r"\bbbc\s?one\b",
-        r"\bbbc\s?two\b",
+        # Removed: BBC One, BBC Two, ITV, Channel 4 (UK-only geoblocked),
+        # Fox News (US-only geoblocked). Kept/added ones that are
+        # generally available worldwide without geo-restriction --
+        # best-effort assumption, tell me if any of these are still
+        # blocked for you.
         r"\bcnn\b",
         r"\bsky\s?news\b",
-        r"\bitv\b",
-        r"\bchannel\s?4\b",
-        r"\bfox\s?news\b",
         r"\bal\s?jazeera\b",
         r"\bfrance\s?24\b",
+        r"\beuronews\b",
+        r"\bdw\s?news\b",
         r"\bcnbc\b",
+        r"\bbloomberg\b",
     ],
     f"{SPORTS_PREFIX} - General": [
         # Assumed "most known/relevant" -- adjust if you had others in mind.
@@ -254,6 +258,10 @@ def channel_display_name(extinf_line: str) -> str:
 
 
 def normalize_name(name: str) -> str:
+    """Collapse naming variations (TV 2/Fyn vs TV2 Fyn vs tv2fyn, and
+    quality suffixes like "(1080p)"/"HD" that iptv-org appends) so
+    name-based dedup catches them as the same channel."""
+    name = re.sub(r"\b(hd|sd|fhd|uhd|4k|1080p|720p|576p|480p)\b", "", name, flags=re.IGNORECASE)
     return re.sub(r"[^a-zæøå0-9]", "", name.lower())
 
 
