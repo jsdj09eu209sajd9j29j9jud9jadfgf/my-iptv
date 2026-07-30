@@ -14,6 +14,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: update-playlist
+  cancel-in-progress: false
+
 jobs:
   update-playlist:
     runs-on: ubuntu-latest
@@ -53,5 +57,10 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "Update combined playlist"
+            # Someone else (a manual edit, or another run) may have
+            # pushed to main while this run was working. Pull with
+            # rebase right before pushing so our commit lands on top
+            # of the latest main instead of being rejected.
+            git pull --rebase origin main
             git push
           fi
