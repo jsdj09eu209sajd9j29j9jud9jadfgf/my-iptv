@@ -7,6 +7,10 @@ https://drlivedr2hls.akamaized.net/hls/live/2113623/drlivedr2/master.m3u8
 https://drlive03hls.akamaized.net/hls/live/2014190/drlive03/master.m3u8
 #EXTINF:-1 tvg-id="DRTV.dk@SD" tvg-logo="https://i.ibb.co/c6n2vbW/512px-DR-TV-logo-svg.png" group-title="1. Dansk",DRTV (1080p)
 https://drlivedrtvahls.akamaized.net/hls/live/2113613/drlivedrtva/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/oVmCoKY.png" group-title="1. Dansk",TV 2 Lorry
+https://content.jwplatform.com/live/broadcast/P9pBJPnp.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/tEJ22UW.png" group-title="1. Dansk",TV 2 Nord
+https://content.jwplatform.com/live/broadcast/KFXZ5tL6.m3u8
 #EXTINF:-1 tvg-id="TV2Bornholm.dk@SD" tvg-logo="https://i.imgur.com/cEOpXU6.png" group-title="1. Dansk",TV 2/Bornholm (1080p) [Not 24/7]
 https://livecdn.euw1-0005.jwplive.com/live/sites/J42OBHtp/media/vvNWt4O9/live.isml/.m3u8
 #EXTINF:-1 tvg-id="7thHeaven.se@DK" tvg-logo="https://images.pluto.tv/channels/6728c9c85534bb0008b320a4/colorLogoPNG.png" group-title="1. Dansk",7th Heaven
@@ -501,6 +505,8 @@ https://tv-trt1.medya.trt.com.tr/master.m3u8
 https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8
 #EXTINF:-1 tvg-id="StarTV.tr@SD" tvg-logo="https://i.imgur.com/9O3DHRB.png" group-title="2. Tyrkisk",Star TV (720p)
 https://dogus.daioncdn.net/startv/startv_720p.m3u8?&sid=8l4w3lst4co5&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3
+#EXTINF:-1 tvg-logo="https://www.showtv.com.tr/assets/v4/images/common/logo/svg/show-tv-logo.svg" group-title="2. Tyrkisk",Show TV
+https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&st=RBzhSuGauna0OGld-DJUVA&e=1664766175&tv=1&ppid=4d2d554f30b88bd3f1bddda81769134a&dfp_paln=AQzzBGQEBD9lbbuaVQPUqragrzyHS6YhhjbaYjXAeI2AJ1EtBd4x-uwKiVqUMetVnb5cjqY-nMcmfpeMBbZIERsoJdH6Zv17L-8F6Ge4k-bql6LmV4G-v0O_dz-sI51IbnuktaBUxQ9-VzJQ2_KsBPgkkbvsT1DrdtAlCvzuEini5wxDfVnEb7W07NWlX_ofIIy8oFwZSayoggroUbhoLem8OxoWO9PTr2BFc6lXpoVPjFys-uz9rhC2NIN6d-zXg5vzgtLvV_APPhuW0sN2f7m3TLsM_pvJ3HTcklOolTKgKKHEZN4UoH7VBN-L1mYmeNBMFZGnPaFoFOsEzmMo2iSL3oUGkZSqgTYsTwY1KcgLW49wBJHFYTS23kXwGRDvMWtjg89D1I5bCMT83OzEZQPWoaNSk5JOLKLO_fqqMsczaJXaASfKNbGH3n0asO0wFH9MZjIJlxu9Tf5XSGxWMY9rn9e2woYpmcnX_NfdwLAkyM9IWuTi-WvZ6VKk7uhNeLY6JdjjRVtD8-PWwwnUBwIZuuyaWwhHY__BGOsFr2KGBdIEIpcIX_e7eZRfa8hm-7O0CDdLeMPLQejtoCE6VXYHKboDJNI-15db9dnWgXMKn1ZtKeYT3BXUXHMUEJjXI2G736N5YtjOQIZDSDAMAWa6RLvAwRF0_1pP_Ai7n_pcUgXiXxfu1CfOKWMa-OKvj-R2gldXCz564RxQ5xzUExwgsb6jE2bcdqU1pLYkdUH6-gK_pjuZ35gbMpMYi94t940v4qiz09PeEZiKSLGDiJUbmcKRtscDaTLbmS6AXtHw_0huxPlOg1CgfkMjd7E9k_4wyx4hjIIOijZBwMSUFrRBAv_wl_OH5vS46aOtFB45MhGn7nxdm5Puezce_UkUkTqi_XJ_RtIjIj9_Hhypa2jVX2mA92amSwczquGyKBzlisvqSwbA9B35_V5Fz-mkTYqo5jbGqcZgwuwBrMa_nVCQ7CtSif-2xU1X7ffpkZ9eQy7Z8_a_ZxDmc-St1WwCVeZ6k9XgxMqdc9h295a4VwsAjrXPwfNRx2lbxHIZLN0ZNnym5j-lpeZszoyN0VhcKMFB3gR6_5NaBelX_esPUyyNjwiDrD9EFzam41srNCm7ssc7dyJCp_3ykKQsL5UV_8ZYCE7gxLO0wkXHQOkMFzaKtwFy3f-S7RzuyDNYNfGm1jsXgUYZ9-IAzl3vwn85T9QEmc0fugdgKNx0OkSzWZSGaTil1Ci0IPF3f0R0nXddj77JwoUvkRHnozpaX-8lpghOj98jlLCYTmEQcS75oQa3QM7ziA0QXWvM7znl3hpg1frkvKxaWWuTk6-GrcERK_swP0WEZ50-RFyDtv3riw8tFDx08vZZt9KCFcwmadowJnrZGs6is57g7pKmbFvrkdtgCKZwPumYpK2iThwL1IR8QtA6KGUwYxuSfoo9rMj-nZz5jb1SHY0q1gFoOqkvPN4VJQO6Q2JG1VoATdmT3DewlRiY1zlYvdST
 #EXTINF:-1 tvg-id="KanalD.tr@SD" tvg-logo="https://i.imgur.com/9o1atM6.png" group-title="2. Tyrkisk",Kanal D (1080p)
 https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3
 #EXTINF:-1 tvg-id="KanalDDrama.tr@SD" tvg-logo="https://i.imgur.com/WIeZMKT.png" group-title="2. Tyrkisk",Vive Kanal D Drama (1080p)
