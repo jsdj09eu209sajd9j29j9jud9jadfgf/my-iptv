@@ -37,9 +37,9 @@ jobs:
           npm install playwright
           npx playwright install --with-deps chromium
 
-      - name: Scrape fresh Show TV URL
-        run: node scripts/scrape_showtv.js
-        continue-on-error: true   # never block the whole run if the scrape fails
+      - name: Scrape fresh channel URLs
+        run: node scripts/scrape_channels.js
+        continue-on-error: true   # never block the whole run if scraping fails
 
       - name: Merge playlists
         run: python scripts/merge.py
