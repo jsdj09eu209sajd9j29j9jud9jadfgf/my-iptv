@@ -19,7 +19,7 @@ const TARGETS = [
   { key: 'tvsyd',         page: 'https://www.tvsyd.dk/live-tv' },
   { key: 'tv2ostjylland', page: 'https://www.tv2ostjylland.dk/live-tv' },
   { key: 'tv2ost',        page: 'https://www.tv2east.dk/live' },              // NOTE: real domain is tv2east.dk, not tv2ost.dk
-  { key: 'tvmidtvest',    page: 'https://www.tvmidtvest.dk/tv-midtvest-live' }, // different path structure than the others
+  { key: 'tvmidtvest',    page: 'https://www.tvmidtvest.dk/tv-kanalen' },
   { key: 'tv2lorry',      page: 'https://www.tv2lorry.dk/live' },
   { key: 'drramasjang',   page: 'https://www.dr.dk/drtv/kanal/dr-ramasjang_20892' },
 ];
@@ -31,10 +31,30 @@ async function scrapeOne(browser, target) {
   let streamUrl = null;
 
   page.on('request', (request) => {
+    if (streamUrl) return; // already found this run
     const url = request.url();
-    if (!streamUrl && (url.includes('.m3u8') || url.includes('.mpd'))) {
+
+    // JWPlayer's analytics beacon (jwpltx.com/.../ping.gif) reliably
+    // embeds the REAL manifest URL in its "mu" query parameter -- this
+    // fires even when we can't get the actual player to start, so it's
+    // actually a more reliable signal than waiting for the real request.
+    if (url.includes('jwpltx.com') && url.includes('ping.gif')) {
+      try {
+        const mu = new URL(url).searchParams.get('mu');
+        if (mu && (mu.includes('.m3u8') || mu.includes('.mpd'))) {
+          streamUrl = mu;
+        }
+      } catch {
+        // malformed URL -- ignore
+      }
+      return; // never treat the ping itself as the stream, even if unparsed
+    }
+
+    // Direct manifest requests (the real thing, when it does fire).
+    if (url.includes('.m3u8') || url.includes('.mpd')) {
       streamUrl = url;
     }
+
     // Debug visibility: log anything that looks stream-related even if
     // it doesn't match above, so failures are diagnosable from the log.
     if (/\.(m3u8|mpd)(\?|$)|\/manifest|\/playlist\.|\/hls\/|\/dash\//i.test(url)) {
@@ -72,7 +92,22 @@ async function scrapeOne(browser, target) {
     }
 
     // Give the player a chance to init/start after consent is cleared.
-    await page.waitForTimeout(8000);
+    await page.waitForTimeout(6000);
+
+    // Some pages lazy-load the player only once it's actually scrolled
+    // into view. Try nudging it into view if we still have nothing.
+    if (!streamUrl) {
+      try {
+        const video = page.locator('video, [class*="player" i]').first();
+        if (await video.count() > 0) {
+          await video.scrollIntoViewIfNeeded({ timeout: 2000 });
+          console.log(`[${target.key}] scrolled player into view`);
+        }
+      } catch {
+        // no such element, or scroll failed -- continue anyway
+      }
+      await page.waitForTimeout(4000);
+    }
 
     // Some players need a click to start (autoplay policies). Try
     // clicking a generic play button / video element if still nothing.
