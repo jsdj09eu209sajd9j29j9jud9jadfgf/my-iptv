@@ -38,7 +38,54 @@ async function scrapeOne(browser, target) {
 
   try {
     await page.goto(target.page, { waitUntil: 'networkidle', timeout: 30000 });
-    await page.waitForTimeout(6000);
+
+    // Many Danish news sites block the video player behind a cookie
+    // consent wall -- the player never requests the stream until consent
+    // is dismissed. Try a handful of common "accept" button patterns.
+    const consentSelectors = [
+      'button:has-text("Acceptér alle")',
+      'button:has-text("Accepter alle")',
+      'button:has-text("Accepter alt")',
+      'button:has-text("Tillad alle")',
+      'button:has-text("Godkend alle")',
+      '#onetrust-accept-btn-handler',
+      '.cm-btn-accept-all',
+      '[data-testid="accept-all"]',
+    ];
+    for (const sel of consentSelectors) {
+      try {
+        const btn = page.locator(sel).first();
+        if (await btn.isVisible({ timeout: 2000 })) {
+          await btn.click({ timeout: 2000 });
+          console.log(`[${target.key}] dismissed cookie consent via "${sel}"`);
+          break;
+        }
+      } catch {
+        // selector not present/visible -- try the next one
+      }
+    }
+
+    // Give the player a chance to init/start after consent is cleared.
+    await page.waitForTimeout(8000);
+
+    // Some players need a click to start (autoplay policies). Try
+    // clicking a generic play button / video element if still nothing.
+    if (!m3u8Url) {
+      const playSelectors = ['button[aria-label*="play" i]', '.jw-icon-playback', 'video'];
+      for (const sel of playSelectors) {
+        try {
+          const el = page.locator(sel).first();
+          if (await el.isVisible({ timeout: 1500 })) {
+            await el.click({ timeout: 1500 });
+            console.log(`[${target.key}] clicked play via "${sel}"`);
+            break;
+          }
+        } catch {
+          // not present -- try next
+        }
+      }
+      await page.waitForTimeout(5000);
+    }
   } catch (err) {
     console.error(`[${target.key}] page load issue (continuing anyway):`, err.message);
   }
