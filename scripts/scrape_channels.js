@@ -82,7 +82,7 @@ async function scrapeOne(browser, target) {
         try {
           const el = page.locator(sel).first();
           if (await el.isVisible({ timeout: 1500 })) {
-            await el.click({ timeout: 1500 });
+            await el.click({ timeout: 1500, force: true });
             console.log(`[${target.key}] clicked play via "${sel}"`);
             break;
           }
@@ -90,7 +90,33 @@ async function scrapeOne(browser, target) {
           // not present -- try next
         }
       }
-      await page.waitForTimeout(5000);
+      await page.waitForTimeout(6000);
+    }
+
+    // Fallback: if no network request was ever captured (e.g. autoplay
+    // never actually triggered in headless mode), scan the raw page
+    // HTML/inline scripts for an embedded JWPlayer stream URL or media
+    // ID -- this is often present as plain text even if playback never
+    // starts, since jwplayer.setup({...}) configs are inlined in <script>
+    // tags rather than fetched dynamically.
+    if (!streamUrl) {
+      try {
+        const html = await page.content();
+        const directMatch = html.match(/https:\/\/content\.jwplatform\.com\/live\/broadcast\/[A-Za-z0-9]+\.m3u8[^"'\s\\]*/);
+        if (directMatch) {
+          streamUrl = directMatch[0];
+          console.log(`[${target.key}] found stream URL embedded in page HTML: ${streamUrl}`);
+        } else {
+          const idMatch = html.match(/jwplatform\.com\/(?:live\/broadcast|videos|players)\/([A-Za-z0-9]{6,10})/)
+            || html.match(/["']mediaid["']\s*:\s*["']([A-Za-z0-9]{6,10})["']/);
+          if (idMatch) {
+            streamUrl = `https://content.jwplatform.com/live/broadcast/${idMatch[1]}.m3u8`;
+            console.log(`[${target.key}] constructed stream URL from embedded media ID: ${streamUrl}`);
+          }
+        }
+      } catch (err) {
+        console.error(`[${target.key}] HTML scan failed:`, err.message);
+      }
     }
   } catch (err) {
     console.error(`[${target.key}] page load issue (continuing anyway):`, err.message);
