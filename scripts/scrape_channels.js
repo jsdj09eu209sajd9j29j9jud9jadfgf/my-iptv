@@ -21,18 +21,24 @@ const TARGETS = [
   { key: 'tv2ost',        page: 'https://www.tv2east.dk/live' },              // NOTE: real domain is tv2east.dk, not tv2ost.dk
   { key: 'tvmidtvest',    page: 'https://www.tvmidtvest.dk/tv-midtvest-live' }, // different path structure than the others
   { key: 'tv2lorry',      page: 'https://www.tv2lorry.dk/live' },
+  { key: 'drramasjang',   page: 'https://www.dr.dk/drtv/kanal/dr-ramasjang_20892' },
 ];
 
 const OUTPUT_FILE = 'channels.json';
 
 async function scrapeOne(browser, target) {
   const page = await browser.newPage();
-  let m3u8Url = null;
+  let streamUrl = null;
 
   page.on('request', (request) => {
     const url = request.url();
-    if (!m3u8Url && url.includes('.m3u8')) {
-      m3u8Url = url;
+    if (!streamUrl && (url.includes('.m3u8') || url.includes('.mpd'))) {
+      streamUrl = url;
+    }
+    // Debug visibility: log anything that looks stream-related even if
+    // it doesn't match above, so failures are diagnosable from the log.
+    if (/\.(m3u8|mpd)(\?|$)|\/manifest|\/playlist\.|\/hls\/|\/dash\//i.test(url)) {
+      console.log(`  [debug] saw request: ${url}`);
     }
   });
 
@@ -70,7 +76,7 @@ async function scrapeOne(browser, target) {
 
     // Some players need a click to start (autoplay policies). Try
     // clicking a generic play button / video element if still nothing.
-    if (!m3u8Url) {
+    if (!streamUrl) {
       const playSelectors = ['button[aria-label*="play" i]', '.jw-icon-playback', 'video'];
       for (const sel of playSelectors) {
         try {
@@ -91,7 +97,7 @@ async function scrapeOne(browser, target) {
   }
 
   await page.close();
-  return m3u8Url;
+  return streamUrl;
 }
 
 (async () => {
