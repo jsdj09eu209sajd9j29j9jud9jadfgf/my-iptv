@@ -95,7 +95,14 @@ SCRAPED = load_scraped_channels()
 
 SHOWTV_LOGO = "https://commons.wikimedia.org/wiki/Special:FilePath/Logo_of_Show_TV.png"
 CARTOONNETWORK_LOGO = "https://commons.wikimedia.org/wiki/Special:FilePath/Cartoon Network + Logo.png"
-CARTOONNETWORK_URL_FILE = "cartoonnetwork_url.txt"
+# Real-time YouTube-live-to-m3u8 relay (github.com/Jitendraunatti/youtube,
+# a Cloudflare Worker). The extraction happens on Cloudflare's servers at
+# the moment your IPTV player actually requests the stream -- not when
+# this script runs -- which sidesteps YouTube blocking GitHub Actions'
+# IP as a bot (both yt-dlp and a headless-browser scrape were blocked).
+# This is a free third-party service with no uptime guarantee; if it
+# ever goes down, tell me and we'll find an alternative.
+CARTOONNETWORK_URL = "https://youtube.jitendraunatti.workers.dev/wanda.m3u8?id=LwKF_GkaNF4"
 
 # Used only if scrape_channels.js failed to capture a fresh Show TV URL
 # this run -- better to show a possibly-stale link than none at all,
@@ -106,22 +113,7 @@ FALLBACK_SHOWTV_URL = "https://showtv.blutv.com/blutv_showtv_live/live.m3u8"
 
 
 def get_cartoonnetwork_url():
-    """Cartoon Network is sourced live from YouTube. Primary: yt-dlp
-    extraction (see the "Extract YouTube stream URLs" workflow step).
-    Backup: the same Playwright scraper used for Show TV/TV2, in case
-    YouTube blocks yt-dlp's request as a bot (common for datacenter IPs
-    like GitHub Actions runners) but lets a real browser session through."""
-    if os.path.exists(CARTOONNETWORK_URL_FILE):
-        with open(CARTOONNETWORK_URL_FILE, "r", encoding="utf-8") as f:
-            url = f.read().strip()
-            if url and url.startswith("http"):
-                return url
-    backup = SCRAPED.get("cartoonnetwork_yt")
-    if backup:
-        print("Cartoon Network: yt-dlp extraction failed, using Playwright-scraped backup URL.", file=sys.stderr)
-        return backup
-    print("No fresh Cartoon Network URL available this run (both yt-dlp and Playwright scrape failed).", file=sys.stderr)
-    return None
+    return CARTOONNETWORK_URL
 
 # (category, display name, scrape key, logo url or None)
 # If a key isn't in channels.json this run (scrape failed), the channel
