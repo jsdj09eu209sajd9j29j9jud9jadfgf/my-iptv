@@ -48,7 +48,7 @@ jobs:
       - name: Extract YouTube stream URLs (Cartoon Network)
         run: |
           pip install --quiet --break-system-packages yt-dlp
-          yt-dlp -g "https://www.youtube.com/live/LwKF_GkaNF4" > cartoonnetwork_url.txt || true
+          yt-dlp -g --extractor-args "youtube:player_client=android,web" "https://www.youtube.com/live/LwKF_GkaNF4" > cartoonnetwork_url.txt || true
         continue-on-error: true   # YouTube link may change/expire; never block the run
 
       - name: Merge playlists
