@@ -94,12 +94,28 @@ def load_scraped_channels() -> dict:
 SCRAPED = load_scraped_channels()
 
 SHOWTV_LOGO = "https://commons.wikimedia.org/wiki/Special:FilePath/Logo_of_Show_TV.png"
+CARTOONNETWORK_LOGO = "https://commons.wikimedia.org/wiki/Special:FilePath/Cartoon Network + Logo.png"
+CARTOONNETWORK_URL_FILE = "cartoonnetwork_url.txt"
+
 # Used only if scrape_channels.js failed to capture a fresh Show TV URL
 # this run -- better to show a possibly-stale link than none at all,
 # since we do have one known-working URL to fall back to. (No such
 # fallback exists for the 7 regional TV2 stations, so those are simply
 # skipped if their scrape fails.)
 FALLBACK_SHOWTV_URL = "https://showtv.blutv.com/blutv_showtv_live/live.m3u8"
+
+
+def get_cartoonnetwork_url():
+    """Cartoon Network is sourced live from YouTube via yt-dlp (see the
+    "Extract YouTube stream URLs" workflow step), since YouTube live
+    manifest URLs expire and need re-extracting each run."""
+    if os.path.exists(CARTOONNETWORK_URL_FILE):
+        with open(CARTOONNETWORK_URL_FILE, "r", encoding="utf-8") as f:
+            url = f.read().strip()
+            if url:
+                return url
+    print("No fresh Cartoon Network URL available this run (yt-dlp extraction failed?).", file=sys.stderr)
+    return None
 
 # (category, display name, scrape key, logo url or None)
 # If a key isn't in channels.json this run (scrape failed), the channel
@@ -140,6 +156,13 @@ def get_extra_channels():
             channels.append((category, name, url, logo))
         else:
             print(f"Skipping '{name}' this run -- no scraped URL and no fallback available for key '{key}'.", file=sys.stderr)
+
+    cn_url = get_cartoonnetwork_url()
+    if cn_url:
+        channels.append(("2. Tyrkisk", "Cartoon Network", cn_url, CARTOONNETWORK_LOGO))
+    else:
+        print("Skipping 'Cartoon Network' this run -- no URL extracted.", file=sys.stderr)
+
     channels.extend(STATIC_EXTRA_CHANNELS)
     return channels
 
@@ -173,6 +196,14 @@ PRIORITY_ORDER = {
         r"\btrt\s?2\b",
         r"\btv\s?8\b",
         r"\bkanal\s?7\b",
+        # Kids channels, kept together near the bottom of the pinned block.
+        r"\btrt\s?[cç]ocuk\b",
+        r"\bcartoon\s?network\b",
+        # A few more well-known ones added below.
+        r"\bcnn\s?t[üu]rk\b",
+        r"\ba\s?haber\b",
+        r"\btrt\s?haber\b",
+        r"\bbeyaz\s?tv\b",
     ],
     "3. Kurdisk": [
         # Best-effort grouping by broadcast origin region. I'm not fully
