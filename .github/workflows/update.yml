@@ -45,6 +45,12 @@ jobs:
         run: node scripts/scrape_channels.js
         continue-on-error: true   # never block the whole run if scraping fails
 
+      - name: Extract YouTube stream URLs (Cartoon Network)
+        run: |
+          pip install --quiet yt-dlp
+          yt-dlp -g "https://www.youtube.com/live/LwKF_GkaNF4" > cartoonnetwork_url.txt || true
+        continue-on-error: true   # YouTube link may change/expire; never block the run
+
       - name: Merge playlists
         run: python scripts/merge.py
 
