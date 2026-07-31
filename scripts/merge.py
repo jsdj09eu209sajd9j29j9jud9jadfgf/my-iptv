@@ -106,15 +106,21 @@ FALLBACK_SHOWTV_URL = "https://showtv.blutv.com/blutv_showtv_live/live.m3u8"
 
 
 def get_cartoonnetwork_url():
-    """Cartoon Network is sourced live from YouTube via yt-dlp (see the
-    "Extract YouTube stream URLs" workflow step), since YouTube live
-    manifest URLs expire and need re-extracting each run."""
+    """Cartoon Network is sourced live from YouTube. Primary: yt-dlp
+    extraction (see the "Extract YouTube stream URLs" workflow step).
+    Backup: the same Playwright scraper used for Show TV/TV2, in case
+    YouTube blocks yt-dlp's request as a bot (common for datacenter IPs
+    like GitHub Actions runners) but lets a real browser session through."""
     if os.path.exists(CARTOONNETWORK_URL_FILE):
         with open(CARTOONNETWORK_URL_FILE, "r", encoding="utf-8") as f:
             url = f.read().strip()
-            if url:
+            if url and url.startswith("http"):
                 return url
-    print("No fresh Cartoon Network URL available this run (yt-dlp extraction failed?).", file=sys.stderr)
+    backup = SCRAPED.get("cartoonnetwork_yt")
+    if backup:
+        print("Cartoon Network: yt-dlp extraction failed, using Playwright-scraped backup URL.", file=sys.stderr)
+        return backup
+    print("No fresh Cartoon Network URL available this run (both yt-dlp and Playwright scrape failed).", file=sys.stderr)
     return None
 
 # (category, display name, scrape key, logo url or None)
