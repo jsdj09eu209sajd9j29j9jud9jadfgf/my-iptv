@@ -22,11 +22,6 @@ const TARGETS = [
   { key: 'tvmidtvest',    page: 'https://www.tvmidtvest.dk/tv-kanalen' },
   { key: 'tv2lorry',      page: 'https://www.tv2lorry.dk/live' },
   { key: 'drramasjang',   page: 'https://www.dr.dk/drtv/kanal/dr-ramasjang_20892' },
-  // Backup for Cartoon Network in case the yt-dlp extraction step fails
-  // (YouTube sometimes blocks yt-dlp's request as a bot from datacenter
-  // IPs like GitHub Actions runners) -- a real headless browser session
-  // sometimes gets through where a raw API call doesn't.
-  { key: 'cartoonnetwork_yt', page: 'https://www.youtube.com/live/LwKF_GkaNF4' },
 ];
 
 const OUTPUT_FILE = 'channels.json';
