@@ -52,20 +52,31 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Save our freshly generated playlist somewhere outside git's
+          # tracked working tree, so the reset below can't touch it.
+          NEWFILE=$(mktemp)
+          cp playlist.m3u "$NEWFILE"
+
+          # Fully sync to the true latest main. This is critical: if we
+          # only "soft reset", any OTHER file that changed upstream since
+          # our checkout (e.g. you editing scripts on GitHub while this
+          # run was in progress) would look like part of our commit --
+          # which once accidentally included .github/workflows/update.yml
+          # and got the whole push rejected (GITHUB_TOKEN is never
+          # allowed to modify workflow files). A hard reset guarantees
+          # every file except playlist.m3u exactly matches origin/main.
+          git fetch origin main
+          git reset --hard origin/main
+
+          # Now reapply only our regenerated playlist on top of that
+          # clean, up-to-date state.
+          cp "$NEWFILE" playlist.m3u
           git add playlist.m3u
+
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            # playlist.m3u is fully regenerated from scratch every run --
-            # it has no meaningful line-by-line history, so a real
-            # merge/rebase against a newer remote version is pointless
-            # and prone to unresolvable conflicts (this file changes
-            # almost entirely every run). Instead: sync to the latest
-            # remote state and rebuild our commit directly on top of it,
-            # so our freshly generated file always wins outright.
-            git fetch origin main
-            git reset --soft origin/main
-            git add playlist.m3u
             git commit -m "Update combined playlist"
             git push origin HEAD:main
           fi
