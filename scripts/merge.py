@@ -342,10 +342,17 @@ def priority_rank(category: str, channel_name: str) -> int:
     return len(patterns)
 
 
-def already_seen(category, url, name, seen_urls_per_category, seen_names_per_category):
+def already_seen(category, url, name, seen_urls_per_category, seen_names_per_category, curated_names_global=None):
     urls = seen_urls_per_category.setdefault(category, set())
     names = seen_names_per_category.setdefault(category, set())
     norm = normalize_name(name)
+    if curated_names_global and norm in curated_names_global:
+        # We deliberately sourced this channel ourselves (e.g. TRT Spor
+        # via canlitv.com) -- block iptv-org's version from sneaking in
+        # under a DIFFERENT category (this is how "TRT Spor" ended up
+        # showing twice: once correctly in "2. Tyrkisk", once as a dead
+        # geo-blocked duplicate in "5. Sports - General").
+        return True
     return (url in urls) or (norm in names)
 
 
@@ -354,7 +361,7 @@ def mark_seen(category, url, name, seen_urls_per_category, seen_names_per_catego
     seen_names_per_category[category].add(normalize_name(name))
 
 
-def process_source(src, category_fn, seen_urls_per_category, seen_names_per_category, category_entries, stats):
+def process_source(src, category_fn, seen_urls_per_category, seen_names_per_category, category_entries, stats, curated_names_global=None):
     print(f"Fetching {src} ...", file=sys.stderr)
     try:
         text = fetch(src)
@@ -373,7 +380,7 @@ def process_source(src, category_fn, seen_urls_per_category, seen_names_per_cate
         else:
             category = category_fn(extinf)
 
-        if already_seen(category, url, name, seen_urls_per_category, seen_names_per_category):
+        if already_seen(category, url, name, seen_urls_per_category, seen_names_per_category, curated_names_global):
             continue
         mark_seen(category, url, name, seen_urls_per_category, seen_names_per_category)
 
@@ -382,11 +389,12 @@ def process_source(src, category_fn, seen_urls_per_category, seen_names_per_cate
         stats["after"] += 1
 
 
-def add_extra_channels(seen_urls_per_category, seen_names_per_category, category_entries, stats):
+def add_extra_channels(seen_urls_per_category, seen_names_per_category, category_entries, stats, curated_names_global):
     for category, name, url, logo, key in get_extra_channels():
         if already_seen(category, url, name, seen_urls_per_category, seen_names_per_category):
             continue
         mark_seen(category, url, name, seen_urls_per_category, seen_names_per_category)
+        curated_names_global.add(normalize_name(name))
 
         if logo:
             extinf = f'#EXTINF:-1 tvg-logo="{logo}" group-title="{category}",{name}'
@@ -410,16 +418,21 @@ def main():
     seen_names_per_category = {}
     category_entries = {}
     stats = {"before": 0, "after": 0}
+    curated_names_global = set()
 
     # Extra/scraped channels are processed FIRST, so they win the
     # name-based dedup below if iptv-org's dan.m3u also has a channel
-    # with the same name but a dead/different URL (e.g. DR Ramasjang).
-    add_extra_channels(seen_urls_per_category, seen_names_per_category, category_entries, stats)
+    # with the same name but a dead/different URL (e.g. DR Ramasjang),
+    # and their names get registered globally so no OTHER category can
+    # introduce a duplicate copy either (e.g. TRT Spor showing up again
+    # under Sports).
+    add_extra_channels(seen_urls_per_category, seen_names_per_category, category_entries, stats, curated_names_global)
 
     for src, category in LANGUAGE_SOURCES:
         process_source(
             src, lambda extinf, cat=category: cat,
             seen_urls_per_category, seen_names_per_category, category_entries, stats,
+            curated_names_global,
         )
 
     def sports_category(extinf_line):
@@ -430,6 +443,7 @@ def main():
     process_source(
         SPORTS_SOURCE, sports_category,
         seen_urls_per_category, seen_names_per_category, category_entries, stats,
+        curated_names_global,
     )
 
     merged = ["#EXTM3U"]
