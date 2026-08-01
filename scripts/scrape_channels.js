@@ -22,6 +22,8 @@ const TARGETS = [
   { key: 'tvmidtvest',    page: 'https://www.tvmidtvest.dk/tv-kanalen' },
   { key: 'tv2lorry',      page: 'https://www.tv2lorry.dk/live' },
   { key: 'drramasjang',   page: 'https://www.dr.dk/drtv/kanal/dr-ramasjang_20892' },
+  { key: 'cartoonnetwork', page: 'https://canlitv.com/cartoon-network' },
+  { key: 'trtspor',        page: 'https://canlitv.com/trt-spor-izle' },
 ];
 
 const OUTPUT_FILE = 'channels.json';
