@@ -133,6 +133,17 @@ FALLBACKS = {
     "showtv": FALLBACK_SHOWTV_URL,
 }
 
+# canlitv.com locks its stream URLs to requests that look like they came
+# from canlitv.com itself (a common anti-hotlinking measure). Without
+# this, the player just spins forever with no visible error -- the
+# server silently rejects the request instead of returning one. Most
+# IPTV players (including IMPlayer) support #EXTVLCOPT header tags to
+# spoof this.
+REFERER_HEADERS = {
+    "cartoonnetwork": "https://canlitv.com/",
+    "trtspor": "https://canlitv.com/",
+}
+
 # Static, non-scraped extras (no known better source yet).
 STATIC_EXTRA_CHANNELS = [
     ("1. Dansk", "TV Storbyen",
@@ -148,11 +159,11 @@ def get_extra_channels():
         if url:
             if key not in SCRAPED:
                 print(f"'{name}': using static fallback URL (scrape failed this run).", file=sys.stderr)
-            channels.append((category, name, url, logo))
+            channels.append((category, name, url, logo, key))
         else:
             print(f"Skipping '{name}' this run -- no scraped URL and no fallback available for key '{key}'.", file=sys.stderr)
 
-    channels.extend(STATIC_EXTRA_CHANNELS)
+    channels.extend((category, name, url, logo, None) for category, name, url, logo in STATIC_EXTRA_CHANNELS)
     return channels
 
 
@@ -372,7 +383,7 @@ def process_source(src, category_fn, seen_urls_per_category, seen_names_per_cate
 
 
 def add_extra_channels(seen_urls_per_category, seen_names_per_category, category_entries, stats):
-    for category, name, url, logo in get_extra_channels():
+    for category, name, url, logo, key in get_extra_channels():
         if already_seen(category, url, name, seen_urls_per_category, seen_names_per_category):
             continue
         mark_seen(category, url, name, seen_urls_per_category, seen_names_per_category)
@@ -381,8 +392,15 @@ def add_extra_channels(seen_urls_per_category, seen_names_per_category, category
             extinf = f'#EXTINF:-1 tvg-logo="{logo}" group-title="{category}",{name}'
         else:
             extinf = f'#EXTINF:-1 group-title="{category}",{name}'
+
+        extra_tags = []
+        referer = REFERER_HEADERS.get(key)
+        if referer:
+            extra_tags.append(f'#EXTVLCOPT:http-referrer={referer}')
+            extra_tags.append(f'#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36')
+
         bucket = category_entries.setdefault(category, [])
-        bucket.append((extinf, [], url, name))
+        bucket.append((extinf, extra_tags, url, name))
         stats["before"] += 1
         stats["after"] += 1
 
