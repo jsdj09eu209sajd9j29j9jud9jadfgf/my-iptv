@@ -94,15 +94,6 @@ def load_scraped_channels() -> dict:
 SCRAPED = load_scraped_channels()
 
 SHOWTV_LOGO = "https://commons.wikimedia.org/wiki/Special:FilePath/Logo_of_Show_TV.png"
-CARTOONNETWORK_LOGO = "https://commons.wikimedia.org/wiki/Special:FilePath/Cartoon Network + Logo.png"
-# Real-time YouTube-live-to-m3u8 relay (github.com/Jitendraunatti/youtube,
-# a Cloudflare Worker). The extraction happens on Cloudflare's servers at
-# the moment your IPTV player actually requests the stream -- not when
-# this script runs -- which sidesteps YouTube blocking GitHub Actions'
-# IP as a bot (both yt-dlp and a headless-browser scrape were blocked).
-# This is a free third-party service with no uptime guarantee; if it
-# ever goes down, tell me and we'll find an alternative.
-CARTOONNETWORK_URL = "https://youtube.jitendraunatti.workers.dev/wanda.m3u8?id=LwKF_GkaNF4"
 
 # Used only if scrape_channels.js failed to capture a fresh Show TV URL
 # this run -- better to show a possibly-stale link than none at all,
@@ -111,16 +102,22 @@ CARTOONNETWORK_URL = "https://youtube.jitendraunatti.workers.dev/wanda.m3u8?id=L
 # skipped if their scrape fails.)
 FALLBACK_SHOWTV_URL = "https://showtv.blutv.com/blutv_showtv_live/live.m3u8"
 
-
-def get_cartoonnetwork_url():
-    return CARTOONNETWORK_URL
+CARTOONNETWORK_LOGO = "https://canlitv.com/kanal/logo/11233.jpg"
 
 # (category, display name, scrape key, logo url or None)
 # If a key isn't in channels.json this run (scrape failed), the channel
 # is skipped entirely for this run rather than shown broken -- EXCEPT
 # Show TV, which has a static fallback below.
+#
+# Cartoon Network is sourced from canlitv.com, an UNOFFICIAL Turkish
+# rebroadcast aggregator (Cartoon Network Turkey has no official free
+# live-streaming site of its own -- it's cable/satellite-only via
+# Tivibu/Digiturk/D-Smart). No uptime/quality guarantee; if it stops
+# working, that's the aggregator, not a bug in this script.
 SCRAPED_EXTRA_CHANNELS = [
     ("2. Tyrkisk", "Show TV",        "showtv",        SHOWTV_LOGO),
+    ("2. Tyrkisk", "Cartoon Network","cartoonnetwork", CARTOONNETWORK_LOGO),
+    ("2. Tyrkisk", "TRT Spor",       "trtspor",       "https://commons.wikimedia.org/wiki/Special:FilePath/TRT Spor kurumsal logo.png"),
     ("1. Dansk",   "TV 2 Fyn",       "tv2fyn",        "https://i.imgur.com/4L6AIMH.png"),
     ("1. Dansk",   "TV 2 Nord",      "tv2nord",       "https://i.imgur.com/tEJ22UW.png"),
     ("1. Dansk",   "TV Syd+",        "tvsyd",         "https://i.imgur.com/k2jf591.png"),
@@ -155,12 +152,6 @@ def get_extra_channels():
         else:
             print(f"Skipping '{name}' this run -- no scraped URL and no fallback available for key '{key}'.", file=sys.stderr)
 
-    cn_url = get_cartoonnetwork_url()
-    if cn_url:
-        channels.append(("2. Tyrkisk", "Cartoon Network", cn_url, CARTOONNETWORK_LOGO))
-    else:
-        print("Skipping 'Cartoon Network' this run -- no URL extracted.", file=sys.stderr)
-
     channels.extend(STATIC_EXTRA_CHANNELS)
     return channels
 
@@ -194,7 +185,7 @@ PRIORITY_ORDER = {
         r"\btrt\s?2\b",
         r"\btv\s?8\b",
         r"\bkanal\s?7\b",
-        # Kids channels, kept together near the bottom of the pinned block.
+        # Kids channels, kept near the bottom of the pinned block.
         r"\btrt\s?[cç]ocuk\b",
         r"\bcartoon\s?network\b",
         # A few more well-known ones added below.
@@ -202,6 +193,7 @@ PRIORITY_ORDER = {
         r"\ba\s?haber\b",
         r"\btrt\s?haber\b",
         r"\bbeyaz\s?tv\b",
+        r"\btrt\s?spor\b",
     ],
     "3. Kurdisk": [
         # Best-effort grouping by broadcast origin region. I'm not fully
@@ -240,6 +232,13 @@ PRIORITY_ORDER = {
         r"\bdw\s?news\b",
         r"\bcnbc\b",
         r"\bbloomberg\b",
+        # Groups ALL sports-related channels in this category together
+        # as one block (there were 80+ individually -- ESPN variants,
+        # Sky/Fox/CBS/NBC Sports, NBA/NFL/NHL/MLB channels, Star Sports,
+        # talkSPORT, Setanta, racing/golf/tennis/combat channels, etc.)
+        # rather than listing each one, which would defeat the point of
+        # a priority list. Relative order among matches is preserved.
+        r"\bsport|espn|nba|nfl|nhl|mlb|cricket|rugby|golf|racing|motor|boxing|wrestl|combat|tennis|fifa|stadium|willow|talksport|setanta|tvmsport",
     ],
     f"{SPORTS_PREFIX} - General": [
         # Assumed "most known/relevant" -- adjust if you had others in mind.
@@ -287,9 +286,11 @@ def channel_display_name(extinf_line: str) -> str:
 
 
 def normalize_name(name: str) -> str:
-    """Collapse naming variations (TV 2/Fyn vs TV2 Fyn vs tv2fyn, and
-    quality suffixes like "(1080p)"/"HD" that iptv-org appends) so
-    name-based dedup catches them as the same channel."""
+    """Collapse naming variations (TV 2/Fyn vs TV2 Fyn vs tv2fyn, quality
+    suffixes like "(1080p)"/"HD", and bracketed status tags like
+    "[Geo-blocked]" that iptv-org appends) so name-based dedup catches
+    them as the same channel."""
+    name = re.sub(r"\[.*?\]", "", name)  # e.g. "[Geo-blocked]", "[Not 24/7]"
     name = re.sub(r"\b(hd|sd|fhd|uhd|4k|1080p|720p|576p|480p)\b", "", name, flags=re.IGNORECASE)
     return re.sub(r"[^a-zæøå0-9]", "", name.lower())
 
