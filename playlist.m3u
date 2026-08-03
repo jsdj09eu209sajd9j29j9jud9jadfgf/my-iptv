@@ -1,10 +1,12 @@
 #EXTM3U
+#EXTINF:-1 tvg-id="TRT1.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/TRT_1_logo_%282021-%29.svg/960px-TRT_1_logo_%282021-%29.svg.png" group-title="2. Tyrkisk",TRT 1 (1440p)
+https://tv-trt1.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-id="ATV.tr@SD" tvg-logo="https://i.imgur.com/HyVUwFC.png" group-title="2. Tyrkisk",ATV (1080p)
 https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8
 #EXTINF:-1 tvg-id="StarTV.tr@SD" tvg-logo="https://i.imgur.com/9O3DHRB.png" group-title="2. Tyrkisk",Star TV (720p)
 https://dogus.daioncdn.net/startv/startv_720p.m3u8?&sid=8l4w3lst4co5&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3
 #EXTINF:-1 tvg-logo="https://commons.wikimedia.org/wiki/Special:FilePath/Logo_of_Show_TV.png" group-title="2. Tyrkisk",Show TV
-https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&st=RBzhSuGauna0OGld-DJUVA&e=1664766175&tv=1&ppid=230da5914844196a6204885c042a7cac&dfp_paln=AQzzBGQEYbqcbii_hZxz7DG5liZfKXLnaIust0NPR7UBvdjAFSzGE70rsPQXDDf5PLVT_W8LHmHk33SJz3WqigOViWHlzTZc4O-sosr9SnghhQs2RBhBGTVH_uNx6NdO8gyb4hOTqtucZ6-KQUhPbzZE9icIVJSwYynHOCADDCCzpTWlwiGhqJwnD6dRzeSDAFNQlGJHwjWIQHV6Jsbn6YwY5WMWm7bxqBk14MrLLKGzByQT4z275Jksm8vcg-9SWT_XtFyrJf7n0SRrZqkxVgFCdplUPLflW2bmFabulh_GeZBic0Md_IFznskJMWqWXvbUe3E1kvRXqIUpgsh8RGm__LMrtwHTsniTp37pLPWyEDEvAcRvppymIz3-_VvwoLUXmbb3wBpdWUAOaAID7vixayv_P3vWcCemTVQESlTh8VPCUKqiOZRPpAG4eCT05ba1ib1lS3qMJRZzOdvC9j-vSIG7vY_ZvBvTrFG7g1ss7fPhSKgOGhkRKJuz26XtwiOhe2FA6dVpPy_F8jY2_3cUCZ0XfWWf6Gu8NPYOhha00KBS49uyr9-ogUnI6irjf1-wWTZ0hbKboBtgXH-SMEYFwe5amTqMBv7r9-mkLC3YVgmnEG3dCRA7ftzPYgtNnQfCgruFv7bg47UJ1kiuZTIYd5LAhZmYD4nrYR_TCMk_xTjGMw6YYR9dhwLyWZB1Bm6d7xxuysBV-0hJjc4xQzExwwuh9t3K95AYpLHJQgq7c1Hltu0HypcUAUpU4U6SLNeebTA9_yCoOwCEqCY-uk8UInK8aDZ1lKDaow5ecL7s_TfGUlGm9UWxIxjl4_lASj42-ApP5Vob0Y19q_nM3wuQh1HVFf6AgZfb_HDXq_E_qKp_sHqwQhgv0QBDJHzjkdXxJ3bgLjDWGzY7in1OFO63C9NMNatQg1DVvN0Md5aOpO5UojV-bGhhqE1FEdaqc9Zeji4zueyWcvqlrxBpVjR5GuuZOPNsCi9wqgCkbounGmT53I-XcjEL8FZLHFF9oYiHrwFDisvBGQ3f6CCMyGrWnBglRWnhg7mMW_DcV-LfRAJG-mzLB_UZiTnp941EF0Ruf4PrFPamfHXBeeApmwVXQJwdx4TsfZV6YMRwp5Lm61zfo0igWPEEmQ-u3YIFY-EZXInxaHqA_sTwiSHTo2IciR5BT282Jjd6j3YqeWrzp46HsbcIQ3VVNyeacKppuvG74cS3AOSdTpZpuRbQ6_7RhPRKw3GqdywqAq4iAn99K2g2AJ7RTmxZEEfhXmEg14gh1HrBGyUQabw3GZrxOjdDcHl6rq_Hg2WYaRQXPO92l8MsZ7FaLTaP_GQUWc5t3nSTJNjxwp0CoouTL7HojyDYkbMdCSud_anW7U9YFiahtHzLNG4yNVCdPpo7_84l8N-SFRyXNlqZGZAIZ2hJpYjAQo-4jo9DwJgT1d0774NyV_pIleIlv5Kk0MgWhJMMjUEMFhIOV59bQG3qU6I.
+https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&st=RBzhSuGauna0OGld-DJUVA&e=1664766175&tv=1&ppid=8001a901f6ce7a5d68701a875daa18ce&dfp_paln=AQzzBGQE7ypsldzmQ7wNu7ZK97Wac6GzhEvvlG3-OIG7BE4rcuICm8UQb0Vdvc-_ZDfA-kZ5Pv2r_zIZanIt1uhwdq2f7nKlOrJE68n1n26uYp2cK4lsk1E0ccirWAslFZKLOu_B_It2BBALYNevQMX_srBXwQcKZ859iaeVaGE-xA-P3y07IJvEmFJf5JHqiZxC5nYUITlMcZfgQtjvjssT-LsLru7DGLg_f-0Vz3O73p3tdwfirAht0jR_J-UG9hZAwvThpTwrfPKezkZC8PfgE5wnQUM7Z0mJXAOhdpHH63iYdTrOvjnbeZldStTO0ovLA2cPJy4x3-7bNALAnXIgya3-JuQjSFeoENZQEwjHbKWEMSYkqW4qSx1JSVD1ZtNb0qVvsO4kXjoLWpQ5rGIwiR87010EqKp7UGu0HkAQgirIKFWWdEjDLcMTeCDIklMD_0rFafNZZw9QUNn6c0HAR18138aFX_4A8NFukuEfYflzRmyV6hbNtLpNAHLuMjenGuYjYZ5wk7mULQuhr2yq4UeI1g9A60Z4RaEXCFKviCgOBtVR9ckeIZ5JfnLQ7kOR-IbZzOaJQjnb5Z1Rh51A1B3Poc9OAEBOd0zfaDTEivdb6X48Y2QuveO11787pE4ymlv_lguAAXt8KSUb7KP_JyCDNQ2hI2ULjYwTaG2AaanwKXLwTpezGMuCtPwplrXRXsnITu6OnoT9cu8MSnbbaJJyAHm7TUHn7Da6n5_DDJ0zL3GC21-gWkG3L3nKy7EVzMgF4bG7_4Zyaij8ZiOi7_1l-mvOF9UdJd8w4eT68AQM5u3Z7q6Ogvv9DfeK6Vr29pDUADSeNNfFaKfOPo917B0w3YAxnk01Bx9cXdQUWv5OAYv0wvvHBU34aue0xwNh0BKlnn8rPINsrJ_e24VPWK3oFu0KFO0gZd0DppRiJUUM2WGi-sIWqVoeRBpWnHbPm7-GT2lEkpam9TfMpTIBaBmEgiwGP89v2c_kNVYyZiTK-HInPWiOMrymow-xkQ1sGF45XqF5xmhY2FgN5QPgwPzqhLLuamf2od1J-NouH-fGwomVPdYfl9co2LVusr0d2Kfo3-YqMD1fazKEVS90THN1uOcX4RwdLcAnaVnclsMnzi6HKbXrZM9uAdrb5wvLSNtGf_3x6mWR6WxaM0Ua63BWQUnngfRgpF4x6yBoB2EOn_SQaJo3hGNABOtgr6CoYrcwJT92hGFrw3j__yVfVVWmeWNwjImm8ciR-nCv2huXbxvTtlk-ubHsQ3Q4bWV0KzvLKDBsEJqqWf5ewiM7ePkIY0w2_jyJkFHEt18ciHHCec9dQfDuqPhgd8dNIop5cFmj0OD1lb1buf943-KDeSUD72RQ0jUqEqn2c988XlpkrS3AK4-GeyFtYjg9i87KHaYeWi-arrKLlJu6OFKml90N4icKiXLGR_a7bonEyBcDFBnn0DNqufSXlBRx_iy21s0SbPjkUK7hAdCX
 #EXTINF:-1 tvg-id="KanalD.tr@SD" tvg-logo="https://i.imgur.com/9o1atM6.png" group-title="2. Tyrkisk",Kanal D (1080p)
 https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3
 #EXTINF:-1 tvg-id="KanalDDrama.tr@SD" tvg-logo="https://i.imgur.com/WIeZMKT.png" group-title="2. Tyrkisk",Kanal D Drama (1080p)
@@ -23,10 +25,12 @@ https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&c
 https://kanal7-live.daioncdn.net/kanal7/kanal7.m3u8
 #EXTINF:-1 tvg-id="Kanal7Avrupa.tr@SD" tvg-logo="https://i.imgur.com/wlfyj5l.png" group-title="2. Tyrkisk",Kanal 7 Avrupa (720p) [Not 24/7]
 https://livetv.radyotvonline.net/kanal7live/kanal7avr/playlist.m3u8
+#EXTINF:-1 tvg-id="TRTCocuk.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TRT_%C3%87ocuk_logo_%282021%29.svg/960px-TRT_%C3%87ocuk_logo_%282021%29.svg.png" group-title="2. Tyrkisk",TRT Cocuk (1440p)
+https://tv-trtcocuk.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-logo="https://canlitv.com/kanal/logo/11233.jpg" group-title="2. Tyrkisk",Cartoon Network
 #EXTVLCOPT:http-referrer=https://canlitv.com/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
-https://yayin2.canlitv.fun/live/cartoon-network.stream/playlist.m3u8?hash=9e5bbcfe455d9fef2978391800ba638e
+https://yayin2.canlitv.fun/live/cartoon-network.stream/playlist.m3u8?hash=c0fcbc1b0feb5a1d37d4cb63dead4001
 #EXTINF:-1 tvg-id="AHaber.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/7/7c/Ahaber_Logo.png" group-title="2. Tyrkisk",A Haber (1080p)
 https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8
 #EXTINF:-1 tvg-id="TRTHaber.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/TRT_Haber_Eyl%C3%BCl_2020_Logo.svg/960px-TRT_Haber_Eyl%C3%BCl_2020_Logo.svg.png" group-title="2. Tyrkisk",TRT Haber (720p)
@@ -36,7 +40,9 @@ https://mn-nl.mncdn.com/blutv_beyaztv2/live.m3u8
 #EXTINF:-1 tvg-logo="https://commons.wikimedia.org/wiki/Special:FilePath/TRT Spor kurumsal logo.png" group-title="2. Tyrkisk",TRT Spor
 #EXTVLCOPT:http-referrer=https://canlitv.com/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
-https://yayin2.canlitv.fun/live/trtspor.stream/playlist.m3u8?hash=9e5bbcfe455d9fef2978391800ba638e
+https://yayin2.canlitv.fun/live/trtspor.stream/playlist.m3u8?hash=c0fcbc1b0feb5a1d37d4cb63dead4001
+#EXTINF:-1 tvg-id="TRTSporYildiz.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/TRT_Spor_Y%C4%B1ld%C4%B1z_Logo.svg/960px-TRT_Spor_Y%C4%B1ld%C4%B1z_Logo.svg.png" group-title="2. Tyrkisk",TRT Spor Yildiz (1440p) [Geo-blocked]
+https://trt.daioncdn.net/trtspor-yildiz/master.m3u8?app=web&platform=trtspor
 #EXTINF:-1 tvg-id="360.tr@SD" tvg-logo="https://i.imgur.com/agn47sQ.png" group-title="2. Tyrkisk",360 TV (720p) [Not 24/7]
 https://turkmedya-live.ercdn.net/tv360/tv360.m3u8
 #EXTINF:-1 tvg-id="A2TV.tr@SD" tvg-logo="https://iatv.tmgrup.com.tr/site/v2/a2tv/i/a2tv-logo.png" group-title="2. Tyrkisk",A2TV (1080p)
@@ -67,6 +73,8 @@ http://206.212.244.63/639/index.m3u8
 https://saran-live.ercdn.net/babytv/index.m3u8
 #EXTINF:-1 tvg-id="BenguturkTV.tr@SD" tvg-logo="https://i.imgur.com/p3ON1oX.png" group-title="2. Tyrkisk",Benguturk TV (1080p)
 http://185.234.111.229:8000/play/a05u
+#EXTINF:-1 tvg-id="BirTV.tr@SD" tvg-logo="https://birtv.tv/assets/upload/637f83951df60.png" group-title="2. Tyrkisk",Bir TV (720p)
+https://edge.taksimbilisim.com/birtv/bant1/playlist.m3u8
 #EXTINF:-1 tvg-id="BloombergHT.tr@SD" tvg-logo="https://i.imgur.com/bmkXfIE.png" group-title="2. Tyrkisk",BloombergHT (720p)
 https://ciner-live.daioncdn.net/bloomberght/bloomberght.m3u8
 #EXTINF:-1 tvg-id="BRTV.tr@SD" tvg-logo="https://i.imgur.com/U3qlEAp.png" group-title="2. Tyrkisk",BRTV (720p) [Geo-blocked]
@@ -2651,6 +2659,8 @@ https://gpuserver3.tier1streams.com/MOTORTREND/index.m3u8
 #EXTINF:-1 tvg-id="DisneyChannel.bg@SD" tvg-logo="https://i.imgur.com/UxrAiAe.png" http-user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.3" group-title="4. Engelsk",Disney Channel
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.3
 http://213.91.179.28:8000/play/a059
+#EXTINF:-1 tvg-id="DisneyChannelEMEA.uk@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg" group-title="4. Engelsk",Disney Channel EMEA (576p)
+http://185.102.171.218/DisneyChannel/index.m3u8
 #EXTINF:-1 tvg-id="DisneyChannel.us@West" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/f/ff/2024_Disney_Channel_text_logo.svg" group-title="4. Engelsk",Disney Channel West (720p)
 http://206.212.244.63/3146/index.m3u8
 #EXTINF:-1 tvg-id="DisneyInternationalHD.in@SD" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_DISNEY_INTERNATIONAL_HD/images/LOGO_HD/image.png" group-title="4. Engelsk",Disney International HD (1080p)
@@ -4879,6 +4889,8 @@ https://fast-channels.sinclairstoryline.com/TBD/index.m3u8
 https://jmp2.uk/plu-63a42df60cc44a0007dd47f8.m3u8
 #EXTINF:-1 tvg-id="ROCKAction.sg@SD" tvg-logo="https://i.imgur.com/l6lmlqG.png" group-title="4. Engelsk",ROCK Action (1080p)
 http://nmk.ioapk.com:5050/4gtv-live138/index.m3u8
+#EXTINF:-1 tvg-id="ROCKEntertainment.sg@SD" tvg-logo="https://i.imgur.com/PWzq0aU.png" group-title="4. Engelsk",ROCK Entertainment (576p)
+http://202.169.224.202:8800/udp/239.9.1.8:1234
 #EXTINF:-1 tvg-id="RockyHillChannel16.us@SD" tvg-logo="https://i.imgur.com/2ZDcH2L.png" group-title="4. Engelsk",Rocky Hill Government Access Channel 16 (480p)
 https://securestream9.champds.com/LIVE/RockyHillCTLIVE/RockyHillCTLIVE.m3u8
 #EXTINF:-1 tvg-id="RomedyNow.in@SD" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_ROMEDY_NOW/images/LOGO_HD/image.png" group-title="4. Engelsk",Romedy Now (576p)
@@ -5051,8 +5063,8 @@ https://f-tx-edge-87.christianworldmedia.com/shinetvpak2/mp4:shinetvpak2/playlis
 https://cdn-shop-lc-01.akamaized.net/Content/DASH_DASH/Live/channel(ott)/master.mpd
 #EXTINF:-1 tvg-id="ShoutFactoryTV.us@SD" tvg-logo="https://i.imgur.com/AgoGr6y.png" group-title="4. Engelsk",Shout! TV (1080p)
 https://d1s1wrpgemt9re.cloudfront.net/Shout_TV.m3u8
-#EXTINF:-1 tvg-id="Showtime.us@East" tvg-logo="https://i.imgur.com/Or0LKsu.png" group-title="4. Engelsk",Showtime (1080p)
-http://23.237.104.106:8080/USA_SHOWTIME/index.m3u8
+#EXTINF:-1 tvg-id="Showtime.us@East" tvg-logo="https://i.imgur.com/Or0LKsu.png" group-title="4. Engelsk",Showtime (720p)
+http://40.160.24.55/SHOWTIME/index.m3u8
 #EXTINF:-1 tvg-id="Showtime2.us@East" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Showtime.svg/960px-Showtime.svg.png" group-title="4. Engelsk",Showtime 2 (1080p)
 http://40.160.24.55/SHOWTIME_2/index.m3u8
 #EXTINF:-1 tvg-id="ShowtimeExtreme.us@East" tvg-logo="https://i.imgur.com/byJNJdm.png" group-title="4. Engelsk",Showtime Extreme (1080p)
@@ -6491,8 +6503,8 @@ http://162.19.255.233:8080/play/UNbAl57p9hXZClOu56FCTYXmD-MOS3u5IUkeXPpBt80/m3u8
 https://edgectc.com/DEPORTES_CTC_PLUS/index.m3u8
 #EXTINF:-1 tvg-id="DiviSport.ua@SD" tvg-logo="https://i.logos-download.com/114030/29915-s5120-904df224e4c030fefcc45adda448b6e8.png/DiviSport_Logo_2023-s5120.png" group-title="5. Sports - General",DiviSport (1080p)
 http://stream.mcquack.net/457/index.m3u8
-#EXTINF:-1 tvg-id="DongNaiTV2.vn@SD" tvg-logo="https://i.imgur.com/tNKPSkO.png" group-title="5. Sports - General",Đồng Nai 2 (480p) [Not 24/7]
-http://118.107.85.4:1935/live/smil:DNTV2.smil/chunklist.m3u8
+#EXTINF:-1 tvg-id="DongNaiTV2.vn@SD" tvg-logo="https://i.imgur.com/tNKPSkO.png" group-title="5. Sports - General",Dong Nai TV 2 (720p)
+https://vtvgolive-ott3.vtvdigital.vn/live/dongnai2tv/chunklist_2.m3u8
 #EXTINF:-1 tvg-id="DraftKingsNetwork.us@SD" tvg-logo="https://i.imgur.com/SFYhgrt.png" group-title="5. Sports - General",DraftKings Network (1080p)
 https://na.linear.zype.com/e0bd0e23-a958-4e43-8164-4f2fef8876a8/fd3614bd-90bf-4530-a277-65ae3a1720c8-zype/live.m3u8
 #EXTINF:-1 tvg-id="DSports.us@Panregional" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="5. Sports - General",DSports (720p)
@@ -6975,6 +6987,8 @@ https://lightning-tracesport-samsungau.amagi.tv/playlist.m3u8
 https://stream8.cinerama.uz/1274/tracks-v1a1/mono.m3u8
 #EXTINF:-1 tvg-id="TraceSportStars.fr@SD" tvg-logo="https://i.imgur.com/FabFP5A.png" group-title="5. Sports - General",Trace Sport Stars SD
 https://channels.trace.plus/Traceprod/TRACE_SPORT_STARS_sd/index.m3u8
+#EXTINF:-1 tvg-id="TRTSporYildiz.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/TRT_Spor_Y%C4%B1ld%C4%B1z_Logo.svg/960px-TRT_Spor_Y%C4%B1ld%C4%B1z_Logo.svg.png" group-title="5. Sports - General",TRT Spor Yildiz (1440p) [Geo-blocked]
+https://trt.daioncdn.net/trtspor-yildiz/master.m3u8?app=web&platform=trtspor
 #EXTINF:-1 tvg-id="TSN1.ca@SD" tvg-logo="https://i.imgur.com/eRFE0jZ.png" group-title="5. Sports - General",TSN1 (1080p)
 http://40.160.24.55/TSN_1/index.m3u8
 #EXTINF:-1 tvg-id="TSN2.ca@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/TSN2.svg/960px-TSN2.svg.png" group-title="5. Sports - General",TSN2 (1080p)
