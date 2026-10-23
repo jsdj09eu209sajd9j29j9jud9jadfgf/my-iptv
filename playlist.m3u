@@ -6,7 +6,7 @@ https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8
 #EXTINF:-1 tvg-id="StarTV.tr@SD" tvg-logo="https://i.imgur.com/9O3DHRB.png" group-title="2. Tyrkisk",Star TV (Turkiye) (720p)
 https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5
 #EXTINF:-1 tvg-logo="https://commons.wikimedia.org/wiki/Special:FilePath/Logo_of_Show_TV.png" group-title="2. Tyrkisk",Show TV
-https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&st=RBzhSuGauna0OGld-DJUVA&e=1664766175&tv=1&ppid=2943f07d19eeccbf36b5b8a89a375444&dfp_paln=AQzzBGQEuJi2LGoj2tmYlVGkx7fMoRazuf7ZHnPkfHs6q1QqBXLb6jBpfMlbmoFuZk22TwbhJ0WX4uiPIfOLb8sq6QM0DOmf_Y3zg4NwcQYgGW28Qvp_sauszJD4KkG3AeWJGHFoyjuXpaxPBPzC77Wl_q8h5tGD1KFE7tzaQIe1nLELgBTLfzg8FesS6Vq4aUIeq8e7GVKgzmX1bvNR1uRJsheHRmY8XV2-rpTtWZNnPYx3o5aqRkmrGDbGjwv2VSDLFki264tiy4gweewdEZoqfbWPt5p_IOp0N58Dt605hjsN5bxhjkOR-boXkJC-6mQ_xfnuBe1MkeOEtw1Tpna4X29jE4IdMr-nhcwCNJsgJ2KLgCIGRhosYlCp8jc6d1PUoiiaQQVSKra9E-NdPk84hb3qONlL2m4lFoSe967R8xMXfxc1QYAwwI1qArQr8br_7UxKLjsIp6QTyy50jjb_o7l1yLzqkGJravlYrQkFjcy-tiwMhPXKApqAMa1KigGVwx1JgFO-6mGZdGivGtD0QqeQ4CtWbHsVikqmgt36Uo40KPbyle8YZxtk_z_NDtArTcAmPHO0-3Xtu7dQD5Nk4Efl0zECR3Z_ay-ax0AcAOIINXypHlYEmJHN66o3jNgEKaa4z75bryUECJPEQA2pevbr0PekpNoPvFHmE2uZL7fHvHtY3mKDNs3uc3iI3sOSTTAFaQQYyHgEdq88fx-JZ4YUUP9ufu5MHLz2PLWwlq7vL8HmvB7FPYJMUremYov2Qllf-08tJ33ejcMHQxKaP_j5g84vJk2fibJ0AUQrf0jbyVzGeEawcpanlvifBzJqoBa-CO5oroOWrPvxyaDg5Yy-GSj-ag7KVpJ22Ip6vD5Sf2a_iUyVmDwDQeeJcmZKZ_uZ5RKo1J_CI1_cPSkDIK8GAsJRMjRQ7KPRZYgl_uL688KmWPCsbfTJuLLSgFU85UZwvndsgHcyT-_yswuPl5N16dVUtAlK3KicFt6fzTpKOldIK1AOY8o1etdRtRv8OeZvPTGip-S0LdBi2_MAhojdyOrWHhALTGpTbANh7fk2WpU7kSXFhUU94dzmU2gMKYx48M7dkUviP3x_px99SD9VvZqlLXGF2Ck-0aiqkifm64KL46vpIc4eAanhSUUnttR8UxjMXk4R7HA0bG29KaanrKhwVZhGKTvVuqmPx7TMNqzjsIx86SMIhnPqKUMHpY-fvM2UG4PH0pQFty5sKwCj2-zT0cvInGIYIaIv3K8fw77os0YJh2BDfyaUYYqVNXjJazjV1k5L_HWMhSeUSymF2WVP3H7aPuF66f0mS-HZTA0OmhqtVfHr9a4.
+https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&st=RBzhSuGauna0OGld-DJUVA&e=1664766175&tv=1
 #EXTINF:-1 tvg-id="KanalD.tr@SD" tvg-logo="https://i.imgur.com/9o1atM6.png" group-title="2. Tyrkisk",Kanal D (Turkiye) (1080p)
 https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3
 #EXTINF:-1 tvg-id="KanalDDrama.tr@SD" tvg-logo="https://i.imgur.com/WIeZMKT.png" group-title="2. Tyrkisk",Kanal D Drama (1080p)
@@ -28,7 +28,7 @@ https://tv-trtcocuk.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-logo="https://canlitv.com/kanal/logo/11233.jpg" group-title="2. Tyrkisk",Cartoon Network
 #EXTVLCOPT:http-referrer=https://canlitv.com/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
-https://yayin2.canlitv.fun/live/cartoon-network.stream/playlist.m3u8?hash=95be951f78f37f4281ed27d04fe367c9
+https://yayin2.canlitv.fun/live/cartoon-network.stream/playlist.m3u8?hash=f0c55af4eeff9019c0ea52e7f37bccd0
 #EXTINF:-1 tvg-id="AHaber.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/7/7c/Ahaber_Logo.png" group-title="2. Tyrkisk",A Haber (1080p)
 https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8
 #EXTINF:-1 tvg-id="TRTHaber.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/TRT_Haber_Eyl%C3%BCl_2020_Logo.svg/960px-TRT_Haber_Eyl%C3%BCl_2020_Logo.svg.png" group-title="2. Tyrkisk",TRT Haber (720p)
@@ -38,7 +38,7 @@ https://mn-nl.mncdn.com/blutv_beyaztv2/live.m3u8
 #EXTINF:-1 tvg-logo="https://commons.wikimedia.org/wiki/Special:FilePath/TRT Spor kurumsal logo.png" group-title="2. Tyrkisk",TRT Spor
 #EXTVLCOPT:http-referrer=https://canlitv.com/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
-https://yayin2.canlitv.fun/live/trtspor.stream/playlist.m3u8?hash=95be951f78f37f4281ed27d04fe367c9
+https://yayin2.canlitv.fun/live/trtspor.stream/playlist.m3u8?hash=f0c55af4eeff9019c0ea52e7f37bccd0
 #EXTINF:-1 tvg-id="TRTSporYildiz.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/TRT_Spor_Y%C4%B1ld%C4%B1z_Logo.svg/960px-TRT_Spor_Y%C4%B1ld%C4%B1z_Logo.svg.png" group-title="2. Tyrkisk",TRT Spor Yildiz (1440p) [Geo-blocked]
 https://trt.daioncdn.net/trtspor-yildiz/master.m3u8?app=web&platform=trtspor
 #EXTINF:-1 tvg-id="24TV.tr@SD" tvg-logo="https://i.imgur.com/8FO41es.png" group-title="2. Tyrkisk",24 TV (720p)
