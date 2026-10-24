@@ -28,7 +28,7 @@ https://tv-trtcocuk.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-logo="https://canlitv.com/kanal/logo/11233.jpg" group-title="2. Tyrkisk",Cartoon Network
 #EXTVLCOPT:http-referrer=https://canlitv.com/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
-https://yayin2.canlitv.fun/live/cartoon-network.stream/playlist.m3u8?hash=a5a0ee2770fc379fa7e4e1ff289e471f
+https://yayin2.canlitv.fun/live/cartoon-network.stream/playlist.m3u8?hash=ab61c6c16aa38bac373ca29ec1da87bd
 #EXTINF:-1 tvg-id="AHaber.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/7/7c/Ahaber_Logo.png" group-title="2. Tyrkisk",A Haber (1080p)
 https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8
 #EXTINF:-1 tvg-id="TRTHaber.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/TRT_Haber_Eyl%C3%BCl_2020_Logo.svg/960px-TRT_Haber_Eyl%C3%BCl_2020_Logo.svg.png" group-title="2. Tyrkisk",TRT Haber (720p)
@@ -38,7 +38,7 @@ https://mn-nl.mncdn.com/blutv_beyaztv2/live.m3u8
 #EXTINF:-1 tvg-logo="https://commons.wikimedia.org/wiki/Special:FilePath/TRT Spor kurumsal logo.png" group-title="2. Tyrkisk",TRT Spor
 #EXTVLCOPT:http-referrer=https://canlitv.com/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
-https://yayin2.canlitv.fun/live/trtspor.stream/playlist.m3u8?hash=a5a0ee2770fc379fa7e4e1ff289e471f
+https://yayin2.canlitv.fun/live/trtspor.stream/playlist.m3u8?hash=ab61c6c16aa38bac373ca29ec1da87bd
 #EXTINF:-1 tvg-id="TRTSporYildiz.tr@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/TRT_Spor_Y%C4%B1ld%C4%B1z_Logo.svg/960px-TRT_Spor_Y%C4%B1ld%C4%B1z_Logo.svg.png" group-title="2. Tyrkisk",TRT Spor Yildiz (1440p) [Geo-blocked]
 https://trt.daioncdn.net/trtspor-yildiz/master.m3u8?app=web&platform=trtspor
 #EXTINF:-1 tvg-id="24TV.tr@SD" tvg-logo="https://i.imgur.com/8FO41es.png" group-title="2. Tyrkisk",24 TV (720p)
